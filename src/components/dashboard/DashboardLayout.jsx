@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaBars, FaTimes, FaHome, FaBook, FaTruck, FaStar, FaUsers, FaChartBar, FaPlus } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const DashboardLayout = () => {
     const { user } = useAuth();
@@ -20,6 +21,13 @@ const DashboardLayout = () => {
         { to: "/dashboard/librarian/add-book", label: "Add Book", icon: <FaPlus /> },
         { to: "/dashboard/librarian/inventory", label: "Manage Inventory", icon: <FaBook /> },
         { to: "/dashboard/librarian/deliveries", label: "Manage Deliveries", icon: <FaTruck /> },
+    ];
+    const userLinks = [
+        { to: "/dashboard/user", label: "Overview", icon: <FaChartBar /> },
+        { to: "/dashboard/user/history", label: "Delivery History", icon: <FaTruck /> },
+        { to: "/dashboard/user/reading-list", label: "My Reading List", icon: <FaBook /> },
+        { to: "/dashboard/user/wishlist", label: "My Wishlist", icon: <FaHeart /> },
+        { to: "/dashboard/user/reviews", label: "My Reviews", icon: <FaStar /> },
     ];
 
     const adminLinks = [

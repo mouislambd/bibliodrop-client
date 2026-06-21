@@ -9,6 +9,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import NotFound from "./pages/NotFound";
 import PrivateRoute from "./components/shared/PrivateRoute";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
+import MyWishlist from "./pages/dashboard/user/MyWishlist";
 
 import UserOverview from "./pages/dashboard/user/UserOverview";
 import DeliveryHistory from "./pages/dashboard/user/DeliveryHistory";
@@ -36,6 +37,7 @@ function App() {
       <Route path="/books" element={<BrowseBooks />} />
       <Route path="/books/:id" element={<BookDetails />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
+      <Route path="user/wishlist" element={<MyWishlist />} />
 
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<DashboardLayout />}>
