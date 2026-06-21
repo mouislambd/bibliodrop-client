@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import axiosInstance from "../utils/axios";
 import toast from "react-hot-toast";
 import ReviewForm from "../components/ReviewForm";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const BookDetails = () => {
     const { id } = useParams();
@@ -15,6 +16,7 @@ const BookDetails = () => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [requesting, setRequesting] = useState(false);
+    const [isWishlisted, setIsWishlisted] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +27,11 @@ const BookDetails = () => {
                 ]);
                 setBook(bookRes.data.book);
                 setReviews(reviewRes.data.reviews);
+
+                if (user) {
+                    const wishRes = await axiosInstance.get(`/wishlist/check/${id}`);
+                    setIsWishlisted(wishRes.data.isWishlisted);
+                }
             } catch (error) {
                 console.error(error);
             } finally {
@@ -32,7 +39,26 @@ const BookDetails = () => {
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, user]);
+    const handleToggleWishlist = async () => {
+        if (!user) {
+            navigate("/login", { state: { from: { pathname: `/books/${id}` } } });
+            return;
+        }
+        try {
+            if (isWishlisted) {
+                await axiosInstance.delete(`/wishlist/${id}`);
+                setIsWishlisted(false);
+                toast.success("Removed from wishlist");
+            } else {
+                await axiosInstance.post("/wishlist", { bookId: id });
+                setIsWishlisted(true);
+                toast.success("Added to wishlist");
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Something went wrong");
+        }
+    };
 
     const handleRequestDelivery = async () => {
         if (!user) {
@@ -89,16 +115,27 @@ const BookDetails = () => {
                                     {book.isCheckedOut ? "Checked Out" : "Available"}
                                 </span>
                             </p>
+    
                             <p><span className="font-semibold">Added:</span> {new Date(book.createdAt).toLocaleDateString()}</p>
                         </div>
+                        
 
-                        <button
-                            onClick={handleRequestDelivery}
-                            disabled={disabled || requesting}
-                            className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            {requesting ? "Processing..." : isOwner ? "You own this book" : book.isCheckedOut ? "Unavailable" : "Request Delivery"}
-                        </button>
+                        <div className="flex items-center">
+                            <button
+                                onClick={handleRequestDelivery}
+                                disabled={disabled || requesting}
+                                className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {requesting ? "Processing..." : isOwner ? "You own this book" : book.isCheckedOut ? "Unavailable" : "Request Delivery"}
+                            </button>
+
+                            <button
+                                onClick={handleToggleWishlist}
+                                className="ml-4 inline-flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
+                            >
+                                {isWishlisted ? <FaHeart className="text-red-500 text-xl" /> : <FaRegHeart className="text-gray-400 text-xl" />}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
