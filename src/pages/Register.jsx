@@ -60,7 +60,7 @@ const Register = () => {
         try {
             await signIn.social({
                 provider: "google",
-                callbackURL: "http://localhost:5173/choose-role",
+                callbackURL: `${import.meta.env.VITE_CLIENT_URL}/choose-role`,
             });
         } catch (error) {
             toast.error("Google login failed");
