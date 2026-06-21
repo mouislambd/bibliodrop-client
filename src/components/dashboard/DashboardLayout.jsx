@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { FaBars, FaTimes, FaHome, FaBook, FaTruck, FaStar, FaUsers, FaChartBar, FaPlus } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaBars, FaTimes, FaHome, FaBook, FaTruck, FaStar, FaUsers, FaChartBar, FaPlus, FaHeart } from "react-icons/fa";
 
 const DashboardLayout = () => {
     const { user } = useAuth();
@@ -13,6 +12,7 @@ const DashboardLayout = () => {
         { to: "/dashboard/user", label: "Overview", icon: <FaChartBar /> },
         { to: "/dashboard/user/history", label: "Delivery History", icon: <FaTruck /> },
         { to: "/dashboard/user/reading-list", label: "My Reading List", icon: <FaBook /> },
+        { to: "/dashboard/user/wishlist", label: "My Wishlist", icon: <FaHeart /> },
         { to: "/dashboard/user/reviews", label: "My Reviews", icon: <FaStar /> },
     ];
 
@@ -21,13 +21,6 @@ const DashboardLayout = () => {
         { to: "/dashboard/librarian/add-book", label: "Add Book", icon: <FaPlus /> },
         { to: "/dashboard/librarian/inventory", label: "Manage Inventory", icon: <FaBook /> },
         { to: "/dashboard/librarian/deliveries", label: "Manage Deliveries", icon: <FaTruck /> },
-    ];
-    const userLinks = [
-        { to: "/dashboard/user", label: "Overview", icon: <FaChartBar /> },
-        { to: "/dashboard/user/history", label: "Delivery History", icon: <FaTruck /> },
-        { to: "/dashboard/user/reading-list", label: "My Reading List", icon: <FaBook /> },
-        { to: "/dashboard/user/wishlist", label: "My Wishlist", icon: <FaHeart /> },
-        { to: "/dashboard/user/reviews", label: "My Reviews", icon: <FaStar /> },
     ];
 
     const adminLinks = [
@@ -42,7 +35,6 @@ const DashboardLayout = () => {
 
     return (
         <div className="flex min-h-screen bg-light">
-            {/* Sidebar */}
             <aside className={`fixed md:static top-0 left-0 h-full w-64 bg-primary text-white z-40 transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
                 <div className="p-6 flex justify-between items-center border-b border-white/10">
                     <Link to="/" className="text-xl font-heading font-bold">📚 BiblioDrop</Link>
@@ -83,7 +75,6 @@ const DashboardLayout = () => {
                 <div className="fixed inset-0 bg-black/50 z-30 md:hidden" onClick={() => setSidebarOpen(false)}></div>
             )}
 
-            {/* Main Content */}
             <div className="flex-1 flex flex-col w-full">
                 <header className="bg-white shadow-sm p-4 flex items-center justify-between md:justify-end">
                     <button className="md:hidden text-2xl text-primary" onClick={() => setSidebarOpen(true)}>
