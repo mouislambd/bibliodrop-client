@@ -6,7 +6,7 @@ const librarians = [
     { name: "Emma Williams", deliveries: 115, avatar: "https://i.pravatar.cc/150?img=3" },
 ];
 
-const TopLibrarians = () => {
+const TopLibrarians = () => { 
     return (
         <section className="py-16 px-4 max-w-7xl mx-auto">
             <h2 className="text-3xl font-heading font-bold text-primary text-center mb-10">Top Librarians</h2>
@@ -29,5 +29,7 @@ const TopLibrarians = () => {
         </section>
     );
 };
+
+
 
 export default TopLibrarians;
