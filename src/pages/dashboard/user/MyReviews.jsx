@@ -7,6 +7,7 @@ const MyReviews = () => {
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
     const [editData, setEditData] = useState({ rating: 5, comment: "" });
+    
 
     useEffect(() => {
         fetchReviews();
@@ -47,6 +48,7 @@ const MyReviews = () => {
             fetchReviews();
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to delete");
+
         }
     };
 
