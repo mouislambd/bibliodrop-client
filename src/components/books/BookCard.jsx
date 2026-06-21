@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const BookCard = ({ book }) => {
+    
     return (
         <Link to={`/books/${book._id}`} className="block group">
             <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
