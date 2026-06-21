@@ -1,61 +1,54 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import axiosInstance from "../utils/axios";
-import { useSession } from "../utils/auth-client";
+import { createContext, useContext } from "react";
+import { authClient } from "../utils/auth-client";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const { data: session, isPending } = useSession();
+    const { data: session, isPending, refetch } = authClient.useSession();
 
-    useEffect(() => {
-        if (isPending) return;
-        if (session?.user) {
-            axiosInstance.post("/users/google-token", {
-                email: session.user.email
-            }).then(res => {
-                setUser(res.data.user);
-            }).catch(() => {
-                setUser(session.user);
-            }).finally(() => {
-                setLoading(false);
-            });
-        } else {
-            fetchUser();
+    const user = session?.user
+        ? {
+            id: session.user.id,
+            name: session.user.name,
+            email: session.user.email,
+            photo: session.user.image || "",
+            role: session.user.role || "user",
         }
-    }, [session, isPending]);
+        : null;
 
-    const fetchUser = async () => {
-        try {
-            const res = await axiosInstance.get("/user-auth/me");
-            setUser(res.data.user);
-        } catch {
-            setUser(null);
-        } finally {
-            setLoading(false);
-        }
+    const register = async ({ name, email, password, photo, role }) => {
+        const result = await authClient.signUp.email({
+            name,
+            email,
+            password,
+            image: photo,
+            role,
+        });
+        if (result.error) throw { response: { data: { message: result.error.message } } };
+        await refetch();
+        return result;
     };
 
-    const login = async (data) => {
-        const res = await axiosInstance.post("/user-auth/login", data);
-        setUser(res.data.user);
-        return res.data;
-    };
-
-    const register = async (data) => {
-        const res = await axiosInstance.post("/user-auth/register", data);
-        setUser(res.data.user);
-        return res.data;
+    const login = async ({ email, password }) => {
+        const result = await authClient.signIn.email({ email, password });
+        if (result.error) throw { response: { data: { message: result.error.message } } };
+        await refetch();
+        return result;
     };
 
     const logout = async () => {
-        await axiosInstance.post("/user-auth/logout");
-        setUser(null);
+        await authClient.signOut();
+        await refetch();
+    };
+
+    const loginWithGoogle = async () => {
+        await authClient.signIn.social({ provider: "google", callbackURL: "/" });
     };
 
     return (
-        <AuthContext.Provider value={{ user, setUser, loading, login, register, logout, fetchUser }}>
+        <AuthContext.Provider
+            value={{ user, loading: isPending, login, register, logout, loginWithGoogle, fetchUser: refetch }}
+        >
             {children}
         </AuthContext.Provider>
     );

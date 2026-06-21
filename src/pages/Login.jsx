@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { signIn } from "../utils/auth-client";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
-    const [googleLoading, setGoogleLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -32,16 +31,7 @@ const Login = () => {
     };
 
     const handleGoogleLogin = async () => {
-        setGoogleLoading(true);
-        try {
-            await signIn.social({
-                provider: "google",
-                callbackURL: `${import.meta.env.VITE_CLIENT_URL}/choose-role`,
-            });
-        } catch (error) {
-            toast.error("Google login failed");
-            setGoogleLoading(false);
-        }
+        await loginWithGoogle();
     };
 
     return (
@@ -54,8 +44,11 @@ const Login = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input
-                            type="email" name="email" required
-                            value={formData.email} onChange={handleChange}
+                            type="email"
+                            name="email"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                             placeholder="you@example.com"
                         />
@@ -63,33 +56,37 @@ const Login = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                         <input
-                            type="password" name="password" required
-                            value={formData.password} onChange={handleChange}
+                            type="password"
+                            name="password"
+                            required
+                            value={formData.password}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                             placeholder="••••••••"
                         />
                     </div>
                     <button
-                        type="submit" disabled={loading}
+                        type="submit"
+                        disabled={loading}
                         className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50"
                     >
                         {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
 
-                <div className="flex items-center my-4">
-                    <hr className="flex-1 border-gray-300" />
-                    <span className="px-3 text-gray-400 text-sm">OR</span>
-                    <hr className="flex-1 border-gray-300" />
+                <div className="flex items-center gap-3 my-4">
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                    <span className="text-gray-400 text-sm">OR</span>
+                    <div className="flex-1 h-px bg-gray-200"></div>
                 </div>
 
                 <button
                     onClick={handleGoogleLogin}
-                    disabled={googleLoading}
-                    className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 transition disabled:opacity-50"
+                    type="button"
+                    className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
                 >
-                    <img src="https://www.google.com/favicon.ico" className="w-5 h-5" />
-                    {googleLoading ? "Redirecting..." : "Continue with Google"}
+                    <FcGoogle className="text-xl" />
+                    Continue with Google
                 </button>
 
                 <p className="text-center text-gray-500 mt-6">
