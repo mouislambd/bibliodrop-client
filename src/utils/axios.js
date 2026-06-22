@@ -1,4 +1,8 @@
-export const authClient = createAuthClient({
+import axios from "axios";
+
+const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
-    callbackURL: `${import.meta.env.VITE_CLIENT_URL}/choose-role`,
+    withCredentials: true,
 });
+
+export default axiosInstance;
