@@ -16,6 +16,17 @@ export const AuthProvider = ({ children }) => {
         }
         : null;
 
+    const getJwtToken = async (email) => {
+        try {
+            await fetch("https://bibliodrop-server.onrender.com/api/users/google-token", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ email }),
+            });
+        } catch (e) { }
+    };
+
     const register = async ({ name, email, password, photo, role }) => {
         const result = await authClient.signUp.email({
             name,
@@ -25,6 +36,7 @@ export const AuthProvider = ({ children }) => {
             role,
         });
         if (result.error) throw { response: { data: { message: result.error.message } } };
+        await getJwtToken(email);
         await refetch();
         return result;
     };
@@ -32,6 +44,7 @@ export const AuthProvider = ({ children }) => {
     const login = async ({ email, password }) => {
         const result = await authClient.signIn.email({ email, password });
         if (result.error) throw { response: { data: { message: result.error.message } } };
+        await getJwtToken(email);
         await refetch();
         return result;
     };
@@ -40,12 +53,14 @@ export const AuthProvider = ({ children }) => {
         await authClient.signOut();
         await refetch();
     };
+
     const loginWithGoogle = async () => {
         await authClient.signIn.social({
             provider: "google",
             callbackURL: "https://bibliodrop-client-sand.vercel.app/choose-role"
         });
     };
+
     return (
         <AuthContext.Provider
             value={{ user, loading: isPending, login, register, logout, loginWithGoogle, fetchUser: refetch }}
