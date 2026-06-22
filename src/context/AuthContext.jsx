@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     const loginWithGoogle = async () => {
         await authClient.signIn.social({
             provider: "google",
-            callbackURL: "https://bibliodrop-client-sand.vercel.app/"
+            callbackURL: "https://bibliodrop-client-sand.vercel.app/choose-role"
         });
     };
     return (
