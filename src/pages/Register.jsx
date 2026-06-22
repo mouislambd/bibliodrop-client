@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { signIn } from "../utils/auth-client";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -11,8 +11,7 @@ const Register = () => {
     });
     const [photoFile, setPhotoFile] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [googleLoading, setGoogleLoading] = useState(false);
-    const { register } = useAuth();
+    const { register, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -55,17 +54,8 @@ const Register = () => {
         }
     };
 
-    const handleGoogleLogin = async () => {
-        setGoogleLoading(true);
-        try {
-            await signIn.social({
-                provider: "google",
-                callbackURL: `${import.meta.env.VITE_CLIENT_URL}/choose-role`,
-            });
-        } catch (error) {
-            toast.error("Google login failed");
-            setGoogleLoading(false);
-        }
+    const handleGoogleSignup = async () => {
+        await loginWithGoogle();
     };
 
     return (
@@ -127,7 +117,6 @@ const Register = () => {
                         >
                             <option value="user">Reader (User)</option>
                             <option value="librarian">Librarian</option>
-                            <option value="admin">Admin</option>
                         </select>
                     </div>
                     <button
@@ -138,19 +127,19 @@ const Register = () => {
                     </button>
                 </form>
 
-                <div className="flex items-center my-4">
-                    <hr className="flex-1 border-gray-300" />
-                    <span className="px-3 text-gray-400 text-sm">OR</span>
-                    <hr className="flex-1 border-gray-300" />
+                <div className="flex items-center gap-3 my-4">
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                    <span className="text-gray-400 text-sm">OR</span>
+                    <div className="flex-1 h-px bg-gray-200"></div>
                 </div>
 
                 <button
-                    onClick={handleGoogleLogin}
-                    disabled={googleLoading}
-                    className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 transition disabled:opacity-50"
+                    onClick={handleGoogleSignup}
+                    type="button"
+                    className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
                 >
-                    <img src="https://www.google.com/favicon.ico" className="w-5 h-5" />
-                    {googleLoading ? "Redirecting..." : "Continue with Google"}
+                    <FcGoogle className="text-xl" />
+                    Continue with Google
                 </button>
 
                 <p className="text-center text-gray-500 mt-6">

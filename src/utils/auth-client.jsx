@@ -1,7 +1,7 @@
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-    baseURL: import.meta.env.VITE_API_URL.replace("/api", "") + "/api/auth",
+    baseURL: "https://bibliodrop-server.onrender.com",
 });
 
 export const { signIn, signUp, signOut, useSession } = authClient;
