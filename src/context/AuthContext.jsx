@@ -40,11 +40,12 @@ export const AuthProvider = ({ children }) => {
         await authClient.signOut();
         await refetch();
     };
-
     const loginWithGoogle = async () => {
-        await authClient.signIn.social({ provider: "google", callbackURL: "/" });
+        await authClient.signIn.social({
+            provider: "google",
+            callbackURL: "https://bibliodrop-client-sand.vercel.app/"
+        });
     };
-
     return (
         <AuthContext.Provider
             value={{ user, loading: isPending, login, register, logout, loginWithGoogle, fetchUser: refetch }}
