@@ -100,6 +100,9 @@ import BookApprovals from "./pages/dashboard/admin/BookApprovals";
 import ManageUsers from "./pages/dashboard/admin/ManageUsers";
 import ManageAllBooks from "./pages/dashboard/admin/ManageAllBooks";
 import Transactions from "./pages/dashboard/admin/Transactions";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -130,6 +133,9 @@ function App() {
           <Route path="admin/users" element={<ManageUsers />} />
           <Route path="admin/books" element={<ManageAllBooks />} />
           <Route path="admin/transactions" element={<Transactions />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Route>
       </Route>
 
