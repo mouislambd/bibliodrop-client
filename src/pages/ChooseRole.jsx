@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const ChooseRole = () => {
     const [selected, setSelected] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { data: session } = useSession();
+    const { data: session, refetch } = useSession();
     const navigate = useNavigate();
 
     const handleChoose = async () => {
@@ -23,9 +23,9 @@ const ChooseRole = () => {
         setLoading(true);
         try {
             await axiosInstance.patch("/users/update-role", { email, role: selected });
-            toast.success("Role updated! Please login again.");
-            await authClient.signOut();
-            window.location.href = "/login";
+            toast.success("Role selected!");
+            await refetch();
+            navigate("/dashboard/user");
         } catch (error) {
             toast.error("Failed to set role");
         } finally {
