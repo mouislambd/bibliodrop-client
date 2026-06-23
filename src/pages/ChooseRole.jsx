@@ -24,8 +24,12 @@ const ChooseRole = () => {
         try {
             await axiosInstance.patch("/users/update-role", { email, role: selected });
             toast.success("Role selected!");
-            await refetch();
-            navigate("/dashboard/user");
+            // Hard refresh করলে session নতুন করে load হবে
+            if (selected === "librarian") {
+                window.location.href = "/dashboard/librarian";
+            } else {
+                window.location.href = "/dashboard/user";
+            }
         } catch (error) {
             toast.error("Failed to set role");
         } finally {
