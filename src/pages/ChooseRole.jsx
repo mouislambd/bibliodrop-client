@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSession } from "../utils/auth-client";
+import { useSession, authClient } from "../utils/auth-client";
 import axiosInstance from "../utils/axios";
 import toast from "react-hot-toast";
 
@@ -23,8 +23,9 @@ const ChooseRole = () => {
         setLoading(true);
         try {
             await axiosInstance.patch("/users/update-role", { email, role: selected });
-            toast.success("Role selected!");
-            window.location.href = "/";
+            toast.success("Role updated! Please login again.");
+            await authClient.signOut();
+            window.location.href = "/login";
         } catch (error) {
             toast.error("Failed to set role");
         } finally {
@@ -58,11 +59,7 @@ const ChooseRole = () => {
                 </div>
 
                 <button
-                    onClick={() => {
-                        console.log("Session:", session);
-                        console.log("User:", session?.user);
-                        handleChoose();
-                    }}
+                    onClick={handleChoose}
                     disabled={loading || !selected}
                     className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50"
                 >
