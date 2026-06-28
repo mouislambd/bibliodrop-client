@@ -17,9 +17,9 @@ https://bibliodrop-client-sand.vercel.app
 - Real-time dashboard analytics using Recharts
 
 ## Tech Stack
-- React + Vite
+- Next.js (App Router)
+- React
 - Tailwind CSS
-- React Router DOM
 - Axios
 - Better Auth (React client)
 - Recharts
@@ -28,7 +28,7 @@ https://bibliodrop-client-sand.vercel.app
 - Stripe.js
 
 ## npm Packages Used
-- react, react-dom, react-router-dom
+- next, react, react-dom
 - axios
 - tailwindcss, postcss, autoprefixer
 - better-auth
@@ -45,10 +45,15 @@ npm install
 npm run dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
 ## Environment Variables
 
-Create a `.env` file in the root with:
+Create a `.env.local` file in the root with:
 
 ```
-
+NEXT_PUBLIC_API_URL=your_api_url
+NEXT_PUBLIC_BETTER_AUTH_URL=your_better_auth_url
+NEXT_PUBLIC_IMGBB_API_KEY=your_imgbb_api_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
