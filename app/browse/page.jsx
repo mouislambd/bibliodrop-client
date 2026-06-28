@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
@@ -10,7 +10,7 @@ const API = process.env.NEXT_PUBLIC_API_URL;
 
 const categories = ["All", "Fiction", "Sci-Fi", "Academic", "History", "Mystery", "Biography"];
 
-export default function BrowsePage() {
+function BrowseContent() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -187,8 +187,8 @@ export default function BrowsePage() {
                                 key={i}
                                 onClick={() => setPage(i + 1)}
                                 className={`px-4 py-2 rounded-lg text-sm transition ${page === i + 1
-                                        ? "bg-emerald-500 text-white"
-                                        : "bg-[#1e293b] hover:bg-emerald-500/30"
+                                    ? "bg-emerald-500 text-white"
+                                    : "bg-[#1e293b] hover:bg-emerald-500/30"
                                     }`}
                             >
                                 {i + 1}
@@ -205,5 +205,17 @@ export default function BrowsePage() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function BrowsePage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
+                <div className="text-gray-400">Loading...</div>
+            </div>
+        }>
+            <BrowseContent />
+        </Suspense>
     );
 }
