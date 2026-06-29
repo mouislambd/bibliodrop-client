@@ -178,7 +178,7 @@ export default function RegisterPage() {
                         onClick={handleRegister}
                         disabled={loading}
                         className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
-                    >
+                 >
                         {loading ? "Creating account..." : "Register"}
                     </button>
                 </div>

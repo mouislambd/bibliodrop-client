@@ -8,6 +8,9 @@ import { FiMenu, FiX, FiBookOpen } from "react-icons/fi";
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const { data: session } = useSession();
+    console.log(session);
+    console.log(session?.user);
+    console.log(session?.user?.role);
     const pathname = usePathname();
 
     const user = session?.user;
