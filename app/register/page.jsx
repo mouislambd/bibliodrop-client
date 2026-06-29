@@ -171,6 +171,7 @@ export default function RegisterPage() {
                     >
                         <option value="user">User (Reader)</option>
                         <option value="librarian">Librarian</option>
+                        <option value="Admin">admin</option>
                     </select>
 
                     <button
