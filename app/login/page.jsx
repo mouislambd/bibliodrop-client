@@ -17,21 +17,20 @@ export default function LoginPage() {
         e.preventDefault();
         setLoading(true);
 
-        const res = await signIn.email({
-            email,
-            password,
-        });
+        try {
+            await signIn.email({
+                email,
+                password,
+            });
 
-        console.log(res);
-
-        if (res.error) {
-            toast.error(res.error.message || "Login failed");
-        } else {
             toast.success("Login successful!");
-            window.location.href = "/";
+            router.push("/");
+        } catch (err) {
+            console.error(err);
+            toast.error("Invalid email or password!");
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
     const handleGoogle = async () => {
         try {
