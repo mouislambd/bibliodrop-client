@@ -40,14 +40,11 @@ export default function AdminDashboardLayout({ children }) {
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-white flex">
-
-            {/* Sidebar */}
             <aside className={`
         fixed inset-y-0 left-0 z-40 w-64 bg-[#1e293b] transform transition-transform duration-300
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
         md:relative md:translate-x-0 md:flex md:flex-col
       `}>
-                {/* Profile */}
                 <div className="p-6 border-b border-gray-700">
                     <img
                         src={session?.user?.image || "https://i.pravatar.cc/100"}
@@ -58,7 +55,6 @@ export default function AdminDashboardLayout({ children }) {
                     <p className="text-red-400 text-xs">Administrator</p>
                 </div>
 
-                {/* Nav Links */}
                 <nav className="flex-1 p-4 space-y-1">
                     {links.map((link) => (
                         <Link
@@ -66,8 +62,8 @@ export default function AdminDashboardLayout({ children }) {
                             href={link.href}
                             onClick={() => setSidebarOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${pathname === link.href
-                                    ? "bg-red-500 text-white"
-                                    : "text-gray-400 hover:bg-[#0f172a] hover:text-white"
+                                ? "bg-red-500 text-white"
+                                : "text-gray-400 hover:bg-[#0f172a] hover:text-white"
                                 }`}
                         >
                             {link.icon}
@@ -77,7 +73,6 @@ export default function AdminDashboardLayout({ children }) {
                 </nav>
             </aside>
 
-            {/* Overlay mobile */}
             {sidebarOpen && (
                 <div
                     className="fixed inset-0 z-30 bg-black/50 md:hidden"
@@ -85,9 +80,7 @@ export default function AdminDashboardLayout({ children }) {
                 />
             )}
 
-            {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0">
-                {/* Mobile Header */}
                 <div className="md:hidden flex items-center gap-3 bg-[#1e293b] px-4 py-3 border-b border-gray-700">
                     <button onClick={() => setSidebarOpen(true)}>
                         <FiMenu size={22} />
@@ -95,12 +88,10 @@ export default function AdminDashboardLayout({ children }) {
                     <span className="font-semibold">Admin Dashboard</span>
                 </div>
 
-                {/* Page Content */}
                 <main className="flex-1 p-6">
                     {children}
                 </main>
             </div>
-
         </div>
     );
 }

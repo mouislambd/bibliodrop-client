@@ -1,94 +1,123 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import {
+    PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
+    BarChart, Bar, XAxis, YAxis, CartesianGrid,
+} from "recharts";
 import { FiUsers, FiBook, FiTruck, FiDollarSign } from "react-icons/fi";
+import toast from "react-hot-toast";
 
-const API = process.env.NEXT_PUBLIC_API_URL;
 const COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"];
 
 export default function AdminOverviewPage() {
-    const [stats, setStats] = useState({ users: 0, books: 0, deliveries: 0, revenue: 0 });
-    const [categoryData, setCategoryData] = useState([]);
+    const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        Promise.all([
-            axios.get(`${API}/users`, { withCredentials: true }),
-            axios.get(`${API}/books/all`, { withCredentials: true }),
-            axios.get(`${API}/deliveries/all`, { withCredentials: true }),
-            axios.get(`${API}/deliveries/transactions`, { withCredentials: true }),
-        ]).then(([u, b, d, t]) => {
-            const allBooks = b.data || [];
-            const allTransactions = t.data || [];
-            setStats({
-                users: u.data?.length || 0,
-                books: allBooks.length,
-                deliveries: d.data?.length || 0,
-                revenue: allTransactions.reduce((sum, t) => sum + (t.amount || 0), 0),
-            });
-            const cats = allBooks.reduce((acc, book) => {
-                const found = acc.find((a) => a.name === book.category);
-                if (found) found.value++;
-                else acc.push({ name: book.category, value: 1 });
-                return acc;
-            }, []);
-            setCategoryData(cats);
-        }).catch(() => { })
-            .finally(() => setLoading(false));
+        fetchOverview();
     }, []);
 
-    if (loading) return (
-        <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
-        </div>
-    );
+    const fetchOverview = async () => {
+        try {
+            setLoading(true);
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/overview`,
+                { credentials: "include" }
+            );
+            if (!res.ok) throw new Error("Failed to load overview");
+            const data = await res.json();
+            setStats(data);
+        } catch (err) {
+            toast.error("Could not load dashboard overview");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {[...Array(4)].map((_, i) => (
+                    <div key={i} className="h-24 bg-[#1e293b] rounded-xl animate-pulse" />
+                ))}
+            </div>
+        );
+    }
+
+    const cards = [
+        { label: "Total Users", value: stats?.totalUsers ?? 0, icon: <FiUsers />, color: "text-emerald-400" },
+        { label: "Total Books", value: stats?.totalBooks ?? 0, icon: <FiBook />, color: "text-blue-400" },
+        { label: "Total Deliveries", value: stats?.totalDeliveries ?? 0, icon: <FiTruck />, color: "text-amber-400" },
+        { label: "Total Revenue", value: `$${(stats?.totalRevenue ?? 0).toFixed(2)}`, icon: <FiDollarSign />, color: "text-pink-400" },
+    ];
+
+    const categoryData = stats?.booksByCategory || [];
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold mb-6">Overview</h1>
+        <div className="space-y-6">
+            <h1 className="text-2xl md:text-3xl font-bold">Overview</h1>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {[
-                    { label: "Total Users", value: stats.users, icon: <FiUsers />, color: "emerald" },
-                    { label: "Total Books", value: stats.books, icon: <FiBook />, color: "blue" },
-                    { label: "Total Deliveries", value: stats.deliveries, icon: <FiTruck />, color: "yellow" },
-                    { label: "Total Revenue", value: `৳${stats.revenue}`, icon: <FiDollarSign />, color: "red" },
-                ].map((stat, i) => (
-                    <div key={i} className="bg-[#1e293b] rounded-xl p-5 flex items-center gap-3">
-                        <div className={`text-2xl text-${stat.color}-400`}>{stat.icon}</div>
+            {/* Stat Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                {cards.map((card) => (
+                    <div key={card.label} className="bg-[#1e293b] rounded-xl p-5 flex items-center justify-between">
                         <div>
-                            <p className="text-gray-400 text-xs">{stat.label}</p>
-                            <p className="text-xl font-bold">{stat.value}</p>
+                            <p className="text-gray-400 text-sm">{card.label}</p>
+                            <p className="text-2xl font-bold mt-1">{card.value}</p>
                         </div>
+                        <div className={`text-3xl ${card.color}`}>{card.icon}</div>
                     </div>
                 ))}
             </div>
 
-            {/* Pie Chart */}
-            {categoryData.length > 0 && (
-                <div className="bg-[#1e293b] rounded-xl p-6">
+            {/* Charts */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Pie Chart: Books by Category */}
+                <div className="bg-[#1e293b] rounded-xl p-5">
                     <h2 className="font-semibold mb-4">Books by Category</h2>
-                    <ResponsiveContainer width="100%" height={280}>
-                        <PieChart>
-                            <Pie
-                                data={categoryData}
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={100}
-                                dataKey="value"
-                                label={({ name, value }) => `${name}: ${value}`}
-                            >
-                                {categoryData.map((_, i) => (
-                                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                        </PieChart>
-                    </ResponsiveContainer>
+                    {categoryData.length === 0 ? (
+                        <p className="text-gray-400 text-sm">No data yet.</p>
+                    ) : (
+                        <ResponsiveContainer width="100%" height={280}>
+                            <PieChart>
+                                <Pie
+                                    data={categoryData}
+                                    dataKey="count"
+                                    nameKey="category"
+                                    cx="50%"
+                                    cy="50%"
+                                    outerRadius={90}
+                                    label
+                                >
+                                    {categoryData.map((_, i) => (
+                                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                                <Tooltip />
+                                <Legend />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    )}
                 </div>
-            )}
+
+                {/* Bar Chart: Revenue/Deliveries trend (if monthly data provided) */}
+                <div className="bg-[#1e293b] rounded-xl p-5">
+                    <h2 className="font-semibold mb-4">Monthly Deliveries</h2>
+                    {!stats?.monthlyDeliveries?.length ? (
+                        <p className="text-gray-400 text-sm">No data yet.</p>
+                    ) : (
+                        <ResponsiveContainer width="100%" height={280}>
+                            <BarChart data={stats.monthlyDeliveries}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                                <XAxis dataKey="month" stroke="#94a3b8" />
+                                <YAxis stroke="#94a3b8" />
+                                <Tooltip />
+                                <Bar dataKey="count" fill="#10b981" radius={[6, 6, 0, 0]} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

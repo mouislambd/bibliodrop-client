@@ -1,210 +1,145 @@
 "use client";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { motion } from "framer-motion";
-import { FiSearch, FiTrash2, FiEyeOff, FiUser } from "react-icons/fi";
-
-const API = process.env.NEXT_PUBLIC_API_URL;
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ManageBooksPage() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [search, setSearch] = useState("");
-    const [statusFilter, setStatusFilter] = useState("All");
-    const [updatingId, setUpdatingId] = useState(null);
+    const [actionId, setActionId] = useState(null);
 
     useEffect(() => {
         fetchBooks();
     }, []);
 
     const fetchBooks = async () => {
-        setLoading(true);
         try {
-            const res = await axios.get(`${API}/books/admin/all-books`, {
-                withCredentials: true,
-            });
-            setBooks(res.data.books || []);
-        } catch (err) {
-            setBooks([]);
+            setLoading(true);
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books`,
+                { credentials: "include" }
+            );
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            setBooks(data.books || []);
+        } catch {
+            toast.error("Could not load books");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleForceUnpublish = async (bookId) => {
-        setUpdatingId(bookId);
+    const handleUnpublish = async (id) => {
         try {
-            await axios.put(
-                `${API}/books/${bookId}`,
-                { status: "unpublished" },
-                { withCredentials: true }
+            setActionId(id);
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/${id}/unpublish`,
+                { method: "PATCH", credentials: "include" }
             );
+            if (!res.ok) throw new Error();
+            toast.success("Book unpublished");
             setBooks((prev) =>
-                prev.map((b) => (b._id === bookId ? { ...b, status: "unpublished" } : b))
+                prev.map((b) => (b._id === id ? { ...b, status: "unpublished" } : b))
             );
-        } catch (err) {
-            alert(err.response?.data?.message || "Failed to unpublish book");
+        } catch {
+            toast.error("Action failed");
         } finally {
-            setUpdatingId(null);
+            setActionId(null);
         }
     };
 
-    const handleDelete = async (bookId, title) => {
-        if (!confirm(`Are you sure you want to permanently delete "${title}"?`)) return;
-        setUpdatingId(bookId);
+    const handleDelete = async (id) => {
+        if (!confirm("Delete this book permanently?")) return;
         try {
-            await axios.delete(`${API}/books/${bookId}`, { withCredentials: true });
-            setBooks((prev) => prev.filter((b) => b._id !== bookId));
-        } catch (err) {
-            alert(err.response?.data?.message || "Failed to delete book");
+            setActionId(id);
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/${id}`,
+                { method: "DELETE", credentials: "include" }
+            );
+            if (!res.ok) throw new Error();
+            toast.success("Book deleted");
+            setBooks((prev) => prev.filter((b) => b._id !== id));
+        } catch {
+            toast.error("Delete failed");
         } finally {
-            setUpdatingId(null);
+            setActionId(null);
         }
     };
 
-    const statusBadgeColor = (status) => {
-        if (status === "published") return "bg-emerald-500/10 text-emerald-400";
-        if (status === "pending_approval") return "bg-yellow-500/10 text-yellow-400";
-        return "bg-gray-500/10 text-gray-400";
+    const statusBadge = (status) => {
+        const map = {
+            "pending approval": "bg-amber-500/20 text-amber-400",
+            published: "bg-emerald-500/20 text-emerald-400",
+            unpublished: "bg-gray-500/20 text-gray-400",
+        };
+        return map[status] || "bg-gray-500/20 text-gray-400";
     };
 
-    const filteredBooks = books.filter((b) => {
-        const matchesSearch =
-            b.title?.toLowerCase().includes(search.toLowerCase()) ||
-            b.author?.toLowerCase().includes(search.toLowerCase());
-        const matchesStatus = statusFilter === "All" || b.status === statusFilter;
-        return matchesSearch && matchesStatus;
-    });
+    if (loading) {
+        return (
+            <div className="space-y-3">
+                {[...Array(5)].map((_, i) => (
+                    <div key={i} className="h-14 bg-[#1e293b] rounded-xl animate-pulse" />
+                ))}
+            </div>
+        );
+    }
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-white px-4 py-8">
-            <div className="max-w-6xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-8"
-                >
-                    <h1 className="text-3xl font-bold mb-1">Manage All Books</h1>
-                    <p className="text-gray-400 text-sm">
-                        Platform-wide control over every book listing
-                    </p>
-                </motion.div>
+        <div>
+            <h1 className="text-2xl md:text-3xl font-bold mb-6">Manage All Books</h1>
 
-                {/* Filters */}
-                <div className="flex flex-wrap gap-3 mb-6">
-                    <div className="relative flex-1 min-w-[200px] max-w-sm">
-                        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder="Search by title or author..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-[#1e293b] text-white pl-10 pr-4 py-2.5 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
-                        />
-                    </div>
-                    <select
-                        value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value)}
-                        className="bg-[#1e293b] text-white px-4 py-2.5 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
-                    >
-                        <option value="All">All Status</option>
-                        <option value="published">Published</option>
-                        <option value="unpublished">Unpublished</option>
-                        <option value="pending_approval">Pending Approval</option>
-                    </select>
-                </div>
-
-                {/* Table */}
-                <div className="bg-[#1e293b] rounded-2xl overflow-hidden">
-                    {loading ? (
-                        <div className="p-6 space-y-3">
-                            {[...Array(5)].map((_, i) => (
-                                <div key={i} className="h-16 bg-[#0f172a] rounded-lg animate-pulse" />
-                            ))}
-                        </div>
-                    ) : filteredBooks.length === 0 ? (
-                        <p className="text-center text-gray-400 py-16">No books found.</p>
-                    ) : (
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                                <thead>
-                                    <tr className="border-b border-gray-700 text-left text-gray-400">
-                                        <th className="px-6 py-4 font-medium">Book</th>
-                                        <th className="px-6 py-4 font-medium">Librarian</th>
-                                        <th className="px-6 py-4 font-medium">Category</th>
-                                        <th className="px-6 py-4 font-medium">Fee</th>
-                                        <th className="px-6 py-4 font-medium">Status</th>
-                                        <th className="px-6 py-4 font-medium text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredBooks.map((book) => (
-                                        <tr
-                                            key={book._id}
-                                            className="border-b border-gray-800 hover:bg-[#0f172a]/50 transition"
+            <div className="overflow-x-auto bg-[#1e293b] rounded-xl">
+                <table className="w-full text-sm">
+                    <thead>
+                        <tr className="text-left text-gray-400 border-b border-gray-700">
+                            <th className="p-4">Title</th>
+                            <th className="p-4">Librarian</th>
+                            <th className="p-4">Category</th>
+                            <th className="p-4">Status</th>
+                            <th className="p-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {books.length === 0 ? (
+                            <tr>
+                                <td colSpan={5} className="text-center py-10 text-gray-500">
+                                    No books found.
+                                </td>
+                            </tr>
+                        ) : (
+                            books.map((book) => (
+                                <tr key={book._id} className="border-b border-gray-800 hover:bg-[#0f172a]">
+                                    <td className="p-4 font-medium">{book.title}</td>
+                                    <td className="p-4 text-gray-400">{book.librarian?.email}</td>
+                                    <td className="p-4 text-gray-400">{book.category}</td>
+                                    <td className="p-4">
+                                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusBadge(book.status)}`}>
+                                            {book.status}
+                                        </span>
+                                    </td>
+                                    <td className="p-4 text-center space-x-2">
+                                        {book.status === "published" && (
+                                            <button
+                                                disabled={actionId === book._id}
+                                                onClick={() => handleUnpublish(book._id)}
+                                                className="btn btn-sm bg-amber-500 hover:bg-amber-600 text-white border-none"
+                                            >
+                                                Unpublish
+                                            </button>
+                                        )}
+                                        <button
+                                            disabled={actionId === book._id}
+                                            onClick={() => handleDelete(book._id)}
+                                            className="btn btn-sm bg-red-500 hover:bg-red-600 text-white border-none"
                                         >
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-3">
-                                                    <img
-                                                        src={book.coverImage}
-                                                        alt={book.title}
-                                                        className="w-10 h-12 object-cover rounded-md"
-                                                    />
-                                                    <div>
-                                                        <p className="font-medium line-clamp-1">{book.title}</p>
-                                                        <p className="text-gray-500 text-xs">{book.author}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 text-gray-400">
-                                                <span className="flex items-center gap-1.5">
-                                                    <FiUser size={14} />
-                                                    {book.librarian?.name || "—"}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 text-gray-400">{book.category}</td>
-                                            <td className="px-6 py-4 text-emerald-400 font-medium">
-                                                ৳{book.deliveryFee}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <span
-                                                    className={`text-xs px-3 py-1 rounded-full font-medium ${statusBadgeColor(
-                                                        book.status
-                                                    )}`}
-                                                >
-                                                    {book.status.replace("_", " ")}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center justify-end gap-2">
-                                                    <button
-                                                        onClick={() => handleForceUnpublish(book._id)}
-                                                        disabled={
-                                                            book.status !== "published" ||
-                                                            updatingId === book._id
-                                                        }
-                                                        title="Force unpublish"
-                                                        className="p-2 bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 rounded-lg disabled:opacity-30 transition"
-                                                    >
-                                                        <FiEyeOff size={14} />
-                                                    </button>
-                                                    <button
-                                                        onClick={() => handleDelete(book._id, book.title)}
-                                                        disabled={updatingId === book._id}
-                                                        title="Delete book"
-                                                        className="p-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg disabled:opacity-30 transition"
-                                                    >
-                                                        <FiTrash2 size={14} />
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
-                </div>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
