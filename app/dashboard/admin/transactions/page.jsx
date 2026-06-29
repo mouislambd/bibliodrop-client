@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const ITEMS_PER_PAGE = 10;
 
 const TransactionsPage = () => {
-    const [transactions, setTransactions] = useState([]);
+    const [deliveries, setDeliveries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,16 +20,15 @@ const TransactionsPage = () => {
     const fetchTransactions = async () => {
         try {
             setLoading(true);
-            const res = await fetch("/api/admin/transactions", {
-                credentials: "include",
-            });
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/delivery/all`,
+                { credentials: "include" }
+            );
 
-            if (!res.ok) {
-                throw new Error("Failed to fetch transactions");
-            }
+            if (!res.ok) throw new Error("Failed to fetch transactions");
 
             const data = await res.json();
-            setTransactions(data);
+            setDeliveries(data.deliveries || []);
         } catch (error) {
             toast.error("Could not load transactions");
         } finally {
@@ -37,25 +36,23 @@ const TransactionsPage = () => {
         }
     };
 
-    // Search filter (by user email, librarian email, or transaction id)
-    const filteredTransactions = transactions.filter((tx) => {
+    const filtered = deliveries.filter((d) => {
         const term = searchTerm.toLowerCase();
         return (
-            tx.transactionId?.toLowerCase().includes(term) ||
-            tx.userEmail?.toLowerCase().includes(term) ||
-            tx.librarianEmail?.toLowerCase().includes(term)
+            d.transactionId?.toLowerCase().includes(term) ||
+            d.user?.email?.toLowerCase().includes(term) ||
+            d.librarian?.email?.toLowerCase().includes(term)
         );
     });
 
-    // Pagination
-    const totalPages = Math.ceil(filteredTransactions.length / ITEMS_PER_PAGE);
-    const paginatedTransactions = filteredTransactions.slice(
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    const paginated = filtered.slice(
         (currentPage - 1) * ITEMS_PER_PAGE,
         currentPage * ITEMS_PER_PAGE
     );
 
-    const totalRevenue = transactions.reduce(
-        (sum, tx) => sum + (tx.amount || 0),
+    const totalRevenue = deliveries.reduce(
+        (sum, d) => sum + (d.deliveryFee || 0),
         0
     );
 
@@ -64,10 +61,7 @@ const TransactionsPage = () => {
             <div className="space-y-4">
                 <div className="h-10 w-64 bg-base-300 rounded animate-pulse" />
                 {[...Array(6)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="h-12 w-full bg-base-300 rounded animate-pulse"
-                    />
+                    <div key={i} className="h-12 w-full bg-base-300 rounded animate-pulse" />
                 ))}
             </div>
         );
@@ -75,19 +69,16 @@ const TransactionsPage = () => {
 
     return (
         <div className="w-full">
-            {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <div>
                     <h1 className="text-2xl md:text-3xl font-bold text-base-content">
                         All Transactions
                     </h1>
                     <p className="text-sm text-base-content/60 mt-1">
-                        {transactions.length} total transactions • $
-                        {totalRevenue.toFixed(2)} total revenue
+                        {deliveries.length} total transactions • ${totalRevenue.toFixed(2)} total revenue
                     </p>
                 </div>
 
-                {/* Search */}
                 <div className="relative w-full md:w-80">
                     <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-base-content/40" />
                     <input
@@ -103,7 +94,6 @@ const TransactionsPage = () => {
                 </div>
             </div>
 
-            {/* Table */}
             <div className="overflow-x-auto bg-base-100 rounded-2xl shadow-sm border border-base-300">
                 <table className="table w-full">
                     <thead>
@@ -116,23 +106,23 @@ const TransactionsPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedTransactions.length === 0 ? (
+                        {paginated.length === 0 ? (
                             <tr>
                                 <td colSpan={5} className="text-center py-10 text-base-content/50">
                                     No transactions found.
                                 </td>
                             </tr>
                         ) : (
-                            paginatedTransactions.map((tx) => (
-                                <tr key={tx._id} className="hover">
-                                    <td className="font-mono text-xs">{tx.transactionId}</td>
-                                    <td>{tx.userEmail}</td>
-                                    <td>{tx.librarianEmail}</td>
+                            paginated.map((d) => (
+                                <tr key={d._id} className="hover">
+                                    <td className="font-mono text-xs">{d.transactionId}</td>
+                                    <td>{d.user?.email}</td>
+                                    <td>{d.librarian?.email}</td>
                                     <td className="font-semibold text-primary">
-                                        ${Number(tx.amount).toFixed(2)}
+                                        ${Number(d.deliveryFee).toFixed(2)}
                                     </td>
                                     <td>
-                                        {new Date(tx.date).toLocaleDateString("en-US", {
+                                        {new Date(d.createdAt).toLocaleDateString("en-US", {
                                             year: "numeric",
                                             month: "short",
                                             day: "numeric",
@@ -145,7 +135,6 @@ const TransactionsPage = () => {
                 </table>
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
                 <div className="flex justify-center items-center gap-2 mt-6">
                     <button
@@ -155,18 +144,15 @@ const TransactionsPage = () => {
                     >
                         Prev
                     </button>
-
                     {[...Array(totalPages)].map((_, i) => (
                         <button
                             key={i}
                             onClick={() => setCurrentPage(i + 1)}
-                            className={`btn btn-sm ${currentPage === i + 1 ? "btn-primary" : "btn-outline"
-                                }`}
+                            className={`btn btn-sm ${currentPage === i + 1 ? "btn-primary" : "btn-outline"}`}
                         >
                             {i + 1}
                         </button>
                     ))}
-
                     <button
                         onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                         disabled={currentPage === totalPages}
