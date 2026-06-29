@@ -26,10 +26,12 @@ export default function LoginPage() {
             setLoading(false);
         }
     };
-
     const handleGoogle = async () => {
         try {
-            await signIn.social({ provider: "google" });
+            await signIn.social({
+                provider: "google",
+                callbackURL: "https://bibliodrop-client-sand.vercel.app",
+            });
         } catch (err) {
             toast.error("Google login failed!");
         }
