@@ -18,16 +18,21 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            await signIn.email({
+            const { data, error } = await signIn.email({
                 email,
                 password,
             });
+
+            if (error) {
+                toast.error(error.message || "Invalid email or password!");
+                return;
+            }
 
             toast.success("Login successful!");
             router.push("/");
         } catch (err) {
             console.error(err);
-            toast.error("Invalid email or password!");
+            toast.error("Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }

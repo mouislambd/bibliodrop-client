@@ -47,17 +47,23 @@ export default function RegisterPage() {
         setLoading(true);
         try {
             const imageUrl = await uploadImage();
-            await signUp.email({
+            const { data, error } = await signUp.email({
                 email: form.email,
                 password: form.password,
                 name: form.name,
                 image: imageUrl,
                 role: form.role,
             });
+
+            if (error) {
+                toast.error(error.message || "Registration failed!");
+                return;
+            }
+
             toast.success("Registration successful!");
             router.push("/");
         } catch (err) {
-            toast.error("Registration failed! Email may already exist.");
+            toast.error("Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }
