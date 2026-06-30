@@ -15,7 +15,7 @@ export default function BookApprovalPage() {
         try {
             setLoading(true);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/pending`,
+                `${process.env.NEXT_PUBLIC_API_URL}/books/admin/all-pending`,
                 { credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -32,7 +32,7 @@ export default function BookApprovalPage() {
         try {
             setActionId(id);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/${id}/approve`,
+                `${process.env.NEXT_PUBLIC_API_URL}/books/${id}/approve`,
                 { method: "PATCH", credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -50,7 +50,7 @@ export default function BookApprovalPage() {
         try {
             setActionId(id);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/${id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/books/${id}`,
                 { method: "DELETE", credentials: "include" }
             );
             if (!res.ok) throw new Error();
