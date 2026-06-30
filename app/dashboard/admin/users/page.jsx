@@ -15,7 +15,7 @@ export default function ManageUsersPage() {
         try {
             setLoading(true);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/users`,
+                `${process.env.NEXT_PUBLIC_API_URL}/users`,
                 { credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -32,7 +32,7 @@ export default function ManageUsersPage() {
         try {
             setActionId(id);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/users/${id}/role`,
+                `${process.env.NEXT_PUBLIC_API_URL}/users/${id}/role`,
                 {
                     method: "PATCH",
                     credentials: "include",
@@ -57,7 +57,7 @@ export default function ManageUsersPage() {
         try {
             setActionId(id);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/users/${id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
                 { method: "DELETE", credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -108,8 +108,8 @@ export default function ManageUsersPage() {
                                     <td className="p-4 text-gray-400">{user.email}</td>
                                     <td className="p-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${user.role === "admin" ? "bg-red-500/20 text-red-400" :
-                                                user.role === "librarian" ? "bg-blue-500/20 text-blue-400" :
-                                                    "bg-emerald-500/20 text-emerald-400"
+                                            user.role === "librarian" ? "bg-blue-500/20 text-blue-400" :
+                                                "bg-emerald-500/20 text-emerald-400"
                                             }`}>
                                             {user.role}
                                         </span>

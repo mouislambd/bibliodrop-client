@@ -15,7 +15,7 @@ export default function ManageBooksPage() {
         try {
             setLoading(true);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books`,
+                `${process.env.NEXT_PUBLIC_API_URL}/books/admin/all-books`,
                 { credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -32,7 +32,7 @@ export default function ManageBooksPage() {
         try {
             setActionId(id);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/${id}/unpublish`,
+                `${process.env.NEXT_PUBLIC_API_URL}/books/${id}/toggle-publish`,
                 { method: "PATCH", credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -52,7 +52,7 @@ export default function ManageBooksPage() {
         try {
             setActionId(id);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/books/${id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/books/${id}`,
                 { method: "DELETE", credentials: "include" }
             );
             if (!res.ok) throw new Error();
@@ -67,7 +67,7 @@ export default function ManageBooksPage() {
 
     const statusBadge = (status) => {
         const map = {
-            "pending approval": "bg-amber-500/20 text-amber-400",
+            "pending_approval": "bg-amber-500/20 text-amber-400",
             published: "bg-emerald-500/20 text-emerald-400",
             unpublished: "bg-gray-500/20 text-gray-400",
         };

@@ -21,10 +21,9 @@ const TransactionsPage = () => {
         try {
             setLoading(true);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/delivery/all`,
+                `${process.env.NEXT_PUBLIC_API_URL}/deliveries/all`,
                 { credentials: "include" }
             );
-
             if (!res.ok) throw new Error("Failed to fetch transactions");
 
             const data = await res.json();
