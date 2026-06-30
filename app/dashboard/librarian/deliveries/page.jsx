@@ -14,8 +14,8 @@ export default function LibrarianDeliveriesPage() {
     }, []);
 
     const fetchDeliveries = () => {
-        axios.get(`${API}/deliveries/librarian`, { withCredentials: true })
-            .then((res) => setDeliveries(res.data || []))
+        axios.get(`${API}/deliveries/librarian-deliveries`, { withCredentials: true })
+            .then((res) => setDeliveries(res.data.deliveries || []))
             .catch(() => toast.error("Failed to load deliveries"))
             .finally(() => setLoading(false));
     };
@@ -28,6 +28,12 @@ export default function LibrarianDeliveriesPage() {
         } catch {
             toast.error("Failed to update status!");
         }
+    };
+
+    const statusBadge = (status) => {
+        if (status === "delivered") return "bg-emerald-500/20 text-emerald-400";
+        if (status === "dispatched") return "bg-blue-500/20 text-blue-400";
+        return "bg-yellow-500/20 text-yellow-400";
     };
 
     if (loading) return (
@@ -60,38 +66,35 @@ export default function LibrarianDeliveriesPage() {
                             <tbody>
                                 {deliveries.map((d) => (
                                     <tr key={d._id} className="border-b border-gray-800 hover:bg-[#0f172a] transition">
-                                        <td className="px-4 py-3">{d.userName || "N/A"}</td>
-                                        <td className="px-4 py-3">{d.bookTitle || "N/A"}</td>
+                                        <td className="px-4 py-3">{d.user?.name || "N/A"}</td>
+                                        <td className="px-4 py-3">{d.book?.title || "N/A"}</td>
                                         <td className="px-4 py-3 text-emerald-400">৳{d.deliveryFee}</td>
                                         <td className="px-4 py-3 text-gray-400">
                                             {new Date(d.createdAt).toLocaleDateString()}
                                         </td>
                                         <td className="px-4 py-3">
-                                            <span className={`px-2 py-0.5 rounded-full text-xs ${d.status === "Delivered" ? "bg-emerald-500/20 text-emerald-400" :
-                                                    d.status === "Dispatched" ? "bg-blue-500/20 text-blue-400" :
-                                                        "bg-yellow-500/20 text-yellow-400"
-                                                }`}>
+                                            <span className={`px-2 py-0.5 rounded-full text-xs ${statusBadge(d.status)}`}>
                                                 {d.status}
                                             </span>
                                         </td>
                                         <td className="px-4 py-3">
-                                            {d.status === "Pending" && (
+                                            {d.status === "pending" && (
                                                 <button
-                                                    onClick={() => handleStatusUpdate(d._id, "Dispatched")}
+                                                    onClick={() => handleStatusUpdate(d._id, "dispatched")}
                                                     className="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-lg hover:bg-blue-500/40 transition"
                                                 >
                                                     Dispatch
                                                 </button>
                                             )}
-                                            {d.status === "Dispatched" && (
+                                            {d.status === "dispatched" && (
                                                 <button
-                                                    onClick={() => handleStatusUpdate(d._id, "Delivered")}
+                                                    onClick={() => handleStatusUpdate(d._id, "delivered")}
                                                     className="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-lg hover:bg-emerald-500/40 transition"
                                                 >
                                                     Mark Delivered
                                                 </button>
                                             )}
-                                            {d.status === "Delivered" && (
+                                            {d.status === "delivered" && (
                                                 <span className="text-xs text-gray-500">Completed</span>
                                             )}
                                         </td>

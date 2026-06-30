@@ -21,8 +21,8 @@ export default function InventoryPage() {
     }, []);
 
     const fetchBooks = () => {
-        axios.get(`${API}/books/my`, { withCredentials: true })
-            .then((res) => setBooks(res.data || []))
+        axios.get(`${API}/books/librarian/my-books`, { withCredentials: true })
+            .then((res) => setBooks(res.data.books || []))
             .catch(() => toast.error("Failed to load books"))
             .finally(() => setLoading(false));
     };
@@ -75,14 +75,20 @@ export default function InventoryPage() {
         }
     };
 
-    const handleUnpublish = async (id) => {
+    const handleTogglePublish = async (id) => {
         try {
-            await axios.patch(`${API}/books/${id}/unpublish`, {}, { withCredentials: true });
-            toast.success("Book unpublished!");
+            await axios.patch(`${API}/books/${id}/toggle-publish`, {}, { withCredentials: true });
+            toast.success("Status updated!");
             fetchBooks();
-        } catch {
-            toast.error("Failed!");
+        } catch (err) {
+            toast.error(err.response?.data?.message || "Failed!");
         }
+    };
+
+    const statusBadge = (status) => {
+        if (status === "published") return "bg-emerald-500/20 text-emerald-400";
+        if (status === "unpublished") return "bg-gray-500/20 text-gray-400";
+        return "bg-yellow-500/20 text-yellow-400";
     };
 
     if (loading) return (
@@ -191,20 +197,17 @@ export default function InventoryPage() {
                                         <td className="px-4 py-3 text-gray-400">{book.category}</td>
                                         <td className="px-4 py-3 text-emerald-400">৳{book.deliveryFee}</td>
                                         <td className="px-4 py-3">
-                                            <span className={`px-2 py-0.5 rounded-full text-xs ${book.status === "Published" ? "bg-emerald-500/20 text-emerald-400" :
-                                                    book.status === "Unpublished" ? "bg-gray-500/20 text-gray-400" :
-                                                        "bg-yellow-500/20 text-yellow-400"
-                                                }`}>
-                                                {book.status}
+                                            <span className={`px-2 py-0.5 rounded-full text-xs ${statusBadge(book.status)}`}>
+                                                {book.status.replace("_", " ")}
                                             </span>
                                         </td>
                                         <td className="px-4 py-3">
                                             <div className="flex gap-2">
-                                                {book.status === "Published" && (
+                                                {book.status !== "pending_approval" && (
                                                     <button
-                                                        onClick={() => handleUnpublish(book._id)}
+                                                        onClick={() => handleTogglePublish(book._id)}
                                                         className="text-gray-400 hover:text-white"
-                                                        title="Unpublish"
+                                                        title={book.status === "published" ? "Unpublish" : "Publish"}
                                                     >
                                                         <FiEyeOff />
                                                     </button>
