@@ -38,20 +38,21 @@ export default function BookDetailsPage({ params }) {
     const fetchBook = async () => {
         try {
             const res = await axios.get(`${API}/books/${id}`);
-            setBook(res.data);
+            setBook(res.data.book || res.data);
         } catch {
             toast.error("Book not found!");
         } finally {
             setLoading(false);
         }
     };
-
+    
     const fetchReviews = async () => {
         try {
             const res = await axios.get(`${API}/reviews/${id}`);
-            setReviews(res.data || []);
+            setReviews(res.data.reviews || []);
         } catch { }
     };
+   
 
     const checkCanReview = async () => {
         try {

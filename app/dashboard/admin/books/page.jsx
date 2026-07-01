@@ -122,7 +122,7 @@ export default function ManageBooksPage() {
                                             <button
                                                 disabled={actionId === book._id}
                                                 onClick={() => handleUnpublish(book._id)}
-                                                className="btn btn-sm bg-amber-500 hover:bg-amber-600 text-white border-none"
+                                                className="btn btn-sm bg-green-900 hover:bg-green-600 text-white border-none"
                                             >
                                                 Unpublish
                                             </button>
@@ -130,7 +130,7 @@ export default function ManageBooksPage() {
                                         <button
                                             disabled={actionId === book._id}
                                             onClick={() => handleDelete(book._id)}
-                                            className="btn btn-sm bg-red-500 hover:bg-red-600 text-white border-none"
+                                            className="btn btn-sm bg-red-900 hover:bg-red-600 text-white border-none"
                                         >
                                             Delete
                                         </button>

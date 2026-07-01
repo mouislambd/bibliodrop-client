@@ -41,7 +41,7 @@ export default function LoginPage() {
         try {
             await signIn.social({
                 provider: "google",
-                callbackURL: "https://bibliodrop-client-sand.vercel.app",
+                callbackURL: "https://bibliodrop-client-sand.vercel.app/choose-role",
             });
         } catch (err) {
             toast.error("Google login failed!");
