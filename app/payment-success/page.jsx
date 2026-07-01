@@ -1,15 +1,15 @@
 "use client";
-import { useEffect, useState, use } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
 import Link from "next/link";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
     const searchParams = useSearchParams();
-    const router = useRouter();
     const [status, setStatus] = useState("loading");
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export default function PaymentSuccessPage() {
                     <>
                         <FiXCircle size={60} className="text-red-400 mx-auto mb-4" />
                         <h1 className="text-2xl font-bold text-white mb-2">Something went wrong!</h1>
-                        <p className="text-gray-400 mb-6">Payment may have failed or already been processed.</p>
+                        <p className="text-gray-400 mb-6">Payment may have failed or already processed.</p>
                         <Link
                             href="/browse"
                             className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
@@ -66,5 +66,17 @@ export default function PaymentSuccessPage() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function PaymentSuccessPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
+                <div className="w-10 h-10 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            </div>
+        }>
+            <PaymentSuccessContent />
+        </Suspense>
     );
 }
