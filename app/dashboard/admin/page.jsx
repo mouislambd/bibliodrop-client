@@ -21,13 +21,13 @@ export default function AdminOverviewPage() {
         try {
             setLoading(true);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/overview`,
+                `${process.env.NEXT_PUBLIC_API_URL}/users/admin/stats`,
                 { credentials: "include" }
             );
-            if (!res.ok) throw new Error("Failed to load overview");
+            if (!res.ok) throw new Error();
             const data = await res.json();
             setStats(data);
-        } catch (err) {
+        } catch {
             toast.error("Could not load dashboard overview");
         } finally {
             setLoading(false);
@@ -48,10 +48,13 @@ export default function AdminOverviewPage() {
         { label: "Total Users", value: stats?.totalUsers ?? 0, icon: <FiUsers />, color: "text-emerald-400" },
         { label: "Total Books", value: stats?.totalBooks ?? 0, icon: <FiBook />, color: "text-blue-400" },
         { label: "Total Deliveries", value: stats?.totalDeliveries ?? 0, icon: <FiTruck />, color: "text-amber-400" },
-        { label: "Total Revenue", value: `$${(stats?.totalRevenue ?? 0).toFixed(2)}`, icon: <FiDollarSign />, color: "text-pink-400" },
+        { label: "Total Revenue", value: `৳${(stats?.totalRevenue ?? 0).toFixed(2)}`, icon: <FiDollarSign />, color: "text-pink-400" },
     ];
 
-    const categoryData = stats?.booksByCategory || [];
+    const categoryData = (stats?.booksByCategory || []).map((c) => ({
+        category: c._id,
+        count: c.count,
+    }));
 
     return (
         <div className="space-y-6">
@@ -72,7 +75,7 @@ export default function AdminOverviewPage() {
 
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Pie Chart: Books by Category */}
+                {/* Pie Chart */}
                 <div className="bg-[#1e293b] rounded-xl p-5">
                     <h2 className="font-semibold mb-4">Books by Category</h2>
                     {categoryData.length === 0 ? (
@@ -100,16 +103,16 @@ export default function AdminOverviewPage() {
                     )}
                 </div>
 
-                {/* Bar Chart: Revenue/Deliveries trend (if monthly data provided) */}
+                {/* Bar Chart */}
                 <div className="bg-[#1e293b] rounded-xl p-5">
-                    <h2 className="font-semibold mb-4">Monthly Deliveries</h2>
-                    {!stats?.monthlyDeliveries?.length ? (
+                    <h2 className="font-semibold mb-4">Books by Category (Bar)</h2>
+                    {categoryData.length === 0 ? (
                         <p className="text-gray-400 text-sm">No data yet.</p>
                     ) : (
                         <ResponsiveContainer width="100%" height={280}>
-                            <BarChart data={stats.monthlyDeliveries}>
+                            <BarChart data={categoryData}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                                <XAxis dataKey="month" stroke="#94a3b8" />
+                                <XAxis dataKey="category" stroke="#94a3b8" />
                                 <YAxis stroke="#94a3b8" />
                                 <Tooltip />
                                 <Bar dataKey="count" fill="#10b981" radius={[6, 6, 0, 0]} />

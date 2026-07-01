@@ -17,11 +17,10 @@ export default function WishlistPage() {
 
     const fetchWishlist = () => {
         axios.get(`${API}/wishlist`, { withCredentials: true })
-            .then((res) => setWishlist(res.data || []))
+            .then((res) => setWishlist(res.data.items || []))
             .catch(() => toast.error("Failed to load wishlist"))
             .finally(() => setLoading(false));
     };
-
     const handleRemove = async (bookId) => {
         try {
             await axios.delete(`${API}/wishlist/${bookId}`, { withCredentials: true });
@@ -53,27 +52,27 @@ export default function WishlistPage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {wishlist.map((item) => (
-                        <div key={item._id} className="bg-[#1e293b] rounded-xl overflow-hidden group relative">
-                            <Link href={`/books/${item.bookId}`}>
-                                <img
-                                    src={item.bookCover || "https://i.ibb.co/placeholder.png"}
-                                    alt={item.bookTitle}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-3">
-                                    <h3 className="font-semibold text-sm truncate">{item.bookTitle}</h3>
-                                    <p className="text-emerald-400 text-sm font-bold mt-1">৳{item.deliveryFee}</p>
-                                </div>
-                            </Link>
-                            <button
-                                onClick={() => handleRemove(item.bookId)}
-                                className="absolute top-2 right-2 bg-red-500/80 hover:bg-red-500 text-white p-1.5 rounded-full transition"
-                            >
-                                <FiTrash2 size={14} />
-                            </button>
-                        </div>
-                    ))}
+                        {wishlist.map((item) => (
+                            <div key={item._id} className="bg-[#1e293b] rounded-xl overflow-hidden group relative">
+                                <Link href={`/books/${item.book?._id}`}>
+                                    <img
+                                        src={item.book?.coverImage || "https://i.pravatar.cc/300"}
+                                        alt={item.book?.title}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="p-3">
+                                        <h3 className="font-semibold text-sm truncate">{item.book?.title}</h3>
+                                        <p className="text-emerald-400 text-sm font-bold mt-1">৳{item.book?.deliveryFee}</p>
+                                    </div>
+                                </Link>
+                                <button
+                                    onClick={() => handleRemove(item.book?._id)}
+                                    className="absolute top-2 right-2 bg-red-500/80 hover:bg-red-500 text-white p-1.5 rounded-full transition"
+                                >
+                                    <FiTrash2 size={14} />
+                                </button>
+                            </div>
+                        ))}
                 </div>
             )}
         </div>

@@ -19,8 +19,8 @@ export default function MyReviewsPage() {
     }, []);
 
     const fetchReviews = () => {
-        axios.get(`${API}/reviews/my`, { withCredentials: true })
-            .then((res) => setReviews(res.data || []))
+        axios.get(`${API}/reviews/user/my-reviews`, { withCredentials: true })
+            .then((res) => setReviews(res.data.reviews || []))
             .catch(() => toast.error("Failed to load reviews"))
             .finally(() => setLoading(false));
     };
@@ -103,7 +103,7 @@ export default function MyReviewsPage() {
                             ) : (
                                 <>
                                     <div className="flex items-center justify-between mb-2">
-                                        <p className="font-semibold text-sm">{review.bookTitle}</p>
+                                            <p className="font-semibold text-sm">{review.book?.title}</p>
                                         <div className="flex gap-2">
                                             <button
                                                 onClick={() => {

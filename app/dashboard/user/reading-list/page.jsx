@@ -11,9 +11,9 @@ export default function ReadingListPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${API}/deliveries/my`, { withCredentials: true })
+        axios.get(`${API}/deliveries/my-deliveries`, { withCredentials: true })
             .then((res) => {
-                const delivered = (res.data || []).filter((d) => d.status === "Delivered");
+                const delivered = (res.data.deliveries || []).filter((d) => d.status === "delivered");
                 setBooks(delivered);
             })
             .catch(() => toast.error("Failed to load reading list"))
@@ -36,15 +36,15 @@ export default function ReadingListPage() {
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {books.map((d) => (
-                        <Link key={d._id} href={`/books/${d.bookId}`}>
+                        <Link key={d._id} href={`/books/${d.book?._id}`}>
                             <div className="bg-[#1e293b] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300">
                                 <img
-                                    src={d.bookCover || "https://i.ibb.co/placeholder.png"}
-                                    alt={d.bookTitle}
+                                    src={d.book?.coverImage || "https://i.pravatar.cc/300"}
+                                    alt={d.book?.title}
                                     className="w-full h-48 object-cover"
                                 />
                                 <div className="p-3">
-                                    <h3 className="font-semibold text-sm truncate">{d.bookTitle}</h3>
+                                    <h3 className="font-semibold text-sm truncate">{d.book?.title}</h3>
                                     <span className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full mt-1 inline-block">
                                         Delivered
                                     </span>

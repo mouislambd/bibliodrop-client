@@ -10,8 +10,8 @@ export default function DeliveryHistoryPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${API}/deliveries/my`, { withCredentials: true })
-            .then((res) => setDeliveries(res.data || []))
+        axios.get(`${API}/deliveries/my-deliveries`, { withCredentials: true })
+            .then((res) => setDeliveries(res.data.deliveries || []))
             .catch(() => toast.error("Failed to load deliveries"))
             .finally(() => setLoading(false));
     }, []);
@@ -42,21 +42,21 @@ export default function DeliveryHistoryPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {deliveries.map((d) => (
-                                    <tr key={d._id} className="border-b border-gray-800 hover:bg-[#0f172a] transition">
-                                        <td className="px-4 py-3">{d.bookTitle || "N/A"}</td>
-                                        <td className="px-4 py-3 text-emerald-400">৳{d.deliveryFee}</td>
-                                        <td className="px-4 py-3 text-gray-400">{new Date(d.createdAt).toLocaleDateString()}</td>
-                                        <td className="px-4 py-3">
-                                            <span className={`px-2 py-0.5 rounded-full text-xs ${d.status === "Delivered" ? "bg-emerald-500/20 text-emerald-400" :
-                                                    d.status === "Dispatched" ? "bg-blue-500/20 text-blue-400" :
-                                                        "bg-yellow-500/20 text-yellow-400"
-                                                }`}>
-                                                {d.status}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                ))}
+                                    {deliveries.map((d) => (
+                                        <tr key={d._id} className="border-b border-gray-800 hover:bg-[#0f172a] transition">
+                                            <td className="px-4 py-3">{d.book?.title || "N/A"}</td>
+                                            <td className="px-4 py-3 text-emerald-400">৳{d.deliveryFee}</td>
+                                            <td className="px-4 py-3 text-gray-400">{new Date(d.createdAt).toLocaleDateString()}</td>
+                                            <td className="px-4 py-3">
+                                                <span className={`px-2 py-0.5 rounded-full text-xs ${d.status === "delivered" ? "bg-emerald-500/20 text-emerald-400" :
+                                                        d.status === "dispatched" ? "bg-blue-500/20 text-blue-400" :
+                                                            "bg-yellow-500/20 text-yellow-400"
+                                                    }`}>
+                                                    {d.status}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>
