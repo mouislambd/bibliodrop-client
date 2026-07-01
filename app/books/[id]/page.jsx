@@ -70,7 +70,7 @@ export default function BookDetailsPage({ params }) {
         setRequestingDelivery(true);
         try {
             const res = await axios.post(
-                `${API}/deliveries/checkout`,
+                `${API}/deliveries/create-checkout-session`,
                 { bookId: id },
                 { withCredentials: true }
             );
