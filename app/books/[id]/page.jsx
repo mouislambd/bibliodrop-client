@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export default function BookDetailsPage({ params }) {
-    const { id } = params;
+    const { id } = use(params);
     const { data: session } = useSession();
     const router = useRouter();
     const [book, setBook] = useState(null);
