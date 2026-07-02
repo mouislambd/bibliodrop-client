@@ -261,8 +261,8 @@ export default function BookDetailsPage({ params }) {
                                         onClick={handleWishlist}
                                         disabled={wishlistLoading}
                                         className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium w-fit transition text-sm ${isWishlisted
-                                                ? "bg-pink-500/20 text-pink-400 hover:bg-pink-500/30"
-                                                : "bg-[#1e293b] text-gray-300 hover:text-white hover:bg-[#293548]"
+                                            ? "bg-pink-500/20 text-pink-400 hover:bg-pink-500/30"
+                                            : "bg-[#1e293b] text-gray-300 hover:text-white hover:bg-[#293548]"
                                             }`}
                                     >
                                         <FiHeart className={isWishlisted ? "fill-pink-400" : ""} />
