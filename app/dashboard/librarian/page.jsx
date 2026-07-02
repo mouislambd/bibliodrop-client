@@ -16,8 +16,8 @@ export default function LibrarianOverviewPage() {
     useEffect(() => {
         if (!session?.user) return;
         Promise.all([
-            axios.get(`${API}/books/my`, { withCredentials: true }),
-            axios.get(`${API}/deliveries/librarian`, { withCredentials: true }),
+            axios.get(`${API}/books/librarian/my-books`, { withCredentials: true }),
+            axios.get(`${API}/deliveries/librarian-deliveries`, { withCredentials: true }),
         ]).then(([b, d]) => {
             setBooks(b.data || []);
             setDeliveries(d.data || []);
