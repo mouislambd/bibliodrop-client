@@ -19,9 +19,10 @@ export default function LibrarianOverviewPage() {
             axios.get(`${API}/books/librarian/my-books`, { withCredentials: true }),
             axios.get(`${API}/deliveries/librarian-deliveries`, { withCredentials: true }),
         ]).then(([b, d]) => {
-            setBooks(b.data || []);
-            setDeliveries(d.data || []);
-        }).catch(() => { })
+            setBooks(b.data.books || []);
+            setDeliveries(d.data.deliveries || []);
+        })
+        .catch(() => { })
             .finally(() => setLoading(false));
     }, [session]);
 
