@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BiblioDrop – Online Book Delivery Management System
 
-## Getting Started
+## 🌐 Live URL
+[https://bibliodrop-client-sand.vercel.app](https://bibliodrop-client-sand.vercel.app)
 
-First, run the development server:
+## 📌 Purpose
+BiblioDrop is a comprehensive digital platform that connects avid readers and students with local libraries and independent book owners. Users can browse diverse book collections, request doorstep delivery, and manage their reading lists. Librarians can list their inventory and manage delivery requests, while an Admin oversees the entire ecosystem.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔑 Admin Credentials
+- **Email:** admin@gmail.com
+- **Password:** admin@123
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Authentication
+- Email/Password registration and login
+- Google OAuth via Better Auth
+- Role-based access (User, Librarian, Admin)
+- JWT token based protected routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### User Features
+- Browse, search, and filter books by category, fee range, and availability
+- Request book delivery via Stripe payment
+- Track delivery history (Pending → Dispatched → Delivered)
+- Add books to personal wishlist
+- Leave verified reviews (only after receiving a book)
+- View reading list of delivered books
 
-## Learn More
+### Librarian Features
+- Add new books with imgBB image hosting
+- Manage book inventory (edit, delete, publish/unpublish)
+- Track and update delivery statuses
+- View earnings and delivery statistics
 
-To learn more about Next.js, take a look at the following resources:
+### Admin Features
+- Approve or reject pending book submissions
+- Manage all users (change roles, delete accounts)
+- Platform-wide book management (unpublish, delete)
+- View all transactions and revenue analytics
+- Dashboard with charts (pie chart, bar chart)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Additional Features
+- Stripe payment integration for delivery fees
+- Server-side pagination on Browse page
+- Advanced search and filtering
+- Skeleton loaders and loading states
+- Responsive design (mobile, tablet, desktop)
+- Framer Motion animations
+- Toast notifications
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+### Frontend
+- Next.js 16 (App Router)
+- Tailwind CSS
+- Framer Motion
+- Recharts
+- Axios
+- Better Auth (client)
+- React Hot Toast
+- React Icons
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Backend
+- Node.js + Express.js
+- MongoDB Atlas + Mongoose
+- Better Auth
+- Stripe
+- JWT
+- imgBB API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📦 NPM Packages Used
+
+### Client
+| Package | Purpose |
+|---|---|
+| `next` | React framework |
+| `axios` | HTTP requests |
+| `better-auth` | Authentication |
+| `framer-motion` | Animations |
+| `recharts` | Charts |
+| `react-hot-toast` | Toast notifications |
+| `react-icons` | Icons |
+| `@stripe/stripe-js` | Stripe payment |
+
+### Server
+| Package | Purpose |
+|---|---|
+| `express` | Web framework |
+| `mongoose` | MongoDB ODM |
+| `better-auth` | Authentication |
+| `stripe` | Payment processing |
+| `jsonwebtoken` | JWT tokens |
+| `cors` | Cross-origin requests |
+| `cookie-parser` | Cookie handling |
+| `dotenv` | Environment variables |
+
+## 🔗 GitHub Repositories
+- **Client:** [https://github.com/mouislambd/bibliodrop-client](https://github.com/mouislambd/bibliodrop-client)
+- **Server:** [https://github.com/mouislambd/bibliodrop-server](https://github.com/mouislambd/bibliodrop-server)
