@@ -16,6 +16,12 @@ const categories = [
   { name: "Biography", icon: "👤" },
 ];
 
+const guides = [
+  { title: "How to Choose a Book", description: "Learn how to find the perfect book for your next read.", icon: "📖" },
+  { title: "Reading Habits", description: "Tips to help you read more consistently every day.", icon: "⏰" },
+  { title: "Library Etiquette", description: "Everything you need to know about borrowing responsibly.", icon: "🤝" },
+];
+
 const topLibrarians = [
   { name: "Rafiq Ahmed", avatar: "https://i.pravatar.cc/100?img=1", deliveries: 142 },
   { name: "Nusrat Jahan", avatar: "https://i.pravatar.cc/100?img=2", deliveries: 98 },
@@ -168,6 +174,33 @@ export default function HomePage() {
                 <span className="text-4xl">{cat.icon}</span>
                 <span className="text-sm font-medium group-hover:text-emerald-400 transition">{cat.name}</span>
               </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reading Guides */}
+      <section className="max-w-7xl mx-auto px-4 py-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-center mb-10"
+        >
+          Reading <span className="text-emerald-400">Guides</span>
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {guides.map((guide, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-[#1e293b] rounded-xl p-6 border border-gray-700 hover:border-emerald-400 transition"
+            >
+              <div className="text-4xl mb-4">{guide.icon}</div>
+              <h3 className="font-semibold text-lg mb-2">{guide.title}</h3>
+              <p className="text-gray-400 text-sm">{guide.description}</p>
             </motion.div>
           ))}
         </div>
