@@ -83,23 +83,25 @@ export default function HomePage() {
         </motion.h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { title: "The Great Gatsby", author: "F. Scott Fitzgerald", image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=400" },
-            { title: "1984", author: "George Orwell", image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=400" },
-            { title: "To Kill a Mockingbird", author: "Harper Lee", image: "https://images.unsplash.com/photo-1506443432602-ac2fcd6fff38?auto=format&fit=crop&q=80&w=400" },
-            { title: "Pride and Prejudice", author: "Jane Austen", image: "https://images.unsplash.com/photo-1531988042230-0973600a3598?auto=format&fit=crop&q=80&w=400" },
+            { id: "667e5a0e5f2b8a001a1d1d11", title: "The Great Gatsby", author: "F. Scott Fitzgerald", image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=400" },
+            { id: "667e5a0e5f2b8a001a1d1d12", title: "1984", author: "George Orwell", image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=400" },
+            { id: "667e5a0e5f2b8a001a1d1d13", title: "To Kill a Mockingbird", author: "Harper Lee", image: "https://images.unsplash.com/photo-1506443432602-ac2fcd6fff38?auto=format&fit=crop&q=80&w=400" },
+            { id: "667e5a0e5f2b8a001a1d1d14", title: "Pride and Prejudice", author: "Jane Austen", image: "https://images.unsplash.com/photo-1531988042230-0973600a3598?auto=format&fit=crop&q=80&w=400" },
           ].map((book, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
-              className="bg-[#0f172a] rounded-xl overflow-hidden"
+              className="bg-[#0f172a] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
-              <img src={book.image} alt={book.title} className="w-full h-40 object-cover" />
-              <div className="p-3">
-                <h3 className="font-semibold text-sm truncate">{book.title}</h3>
-                <p className="text-gray-400 text-xs">{book.author}</p>
-              </div>
+              <Link href={`/books/${book.id}`}>
+                <img src={book.image} alt={book.title} className="w-full h-40 object-cover" />
+                <div className="p-3">
+                  <h3 className="font-semibold text-sm truncate">{book.title}</h3>
+                  <p className="text-gray-400 text-xs">{book.author}</p>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
