@@ -65,7 +65,7 @@ export default function ChooseRolePage() {
                     <button
                         onClick={() => handleRoleSelect("user")}
                         disabled={selecting}
-                        className="bg-[#0f172a] hover:bg-gray-500/20 border-2 border-gray-700 hover:border-gray-400 rounded-2xl p-6 flex flex-col items-center gap-3 transition group disabled:opacity-50"
+                        className="bg-[#0f172a] hover:bg-gradient-to-r from-gray-600 to-gray-800/20 border-2 border-gray-700 hover:border-gray-400 rounded-2xl p-6 flex flex-col items-center gap-3 transition group disabled:opacity-50"
                     >
                         <FiUser size={36} className="text-gray-400" />
                         <div>

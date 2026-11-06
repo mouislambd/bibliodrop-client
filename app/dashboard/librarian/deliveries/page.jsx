@@ -31,7 +31,7 @@ export default function LibrarianDeliveriesPage() {
     };
 
     const statusBadge = (status) => {
-        if (status === "delivered") return "bg-gray-500/20 text-gray-400";
+        if (status === "delivered") return "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400";
         if (status === "dispatched") return "bg-blue-500/20 text-blue-400";
         return "bg-yellow-500/20 text-yellow-400";
     };
@@ -89,7 +89,7 @@ export default function LibrarianDeliveriesPage() {
                                             {d.status === "dispatched" && (
                                                 <button
                                                     onClick={() => handleStatusUpdate(d._id, "delivered")}
-                                                    className="text-xs bg-gray-500/20 text-gray-400 px-3 py-1 rounded-lg hover:bg-gray-500/40 transition"
+                                                    className="text-xs bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400 px-3 py-1 rounded-lg hover:bg-gradient-to-r from-gray-600 to-gray-800/40 transition"
                                                 >
                                                     Mark Delivered
                                                 </button>

@@ -166,7 +166,7 @@ export default function AddBookPage() {
                     <button
                         onClick={handleSubmit}
                         disabled={submitting}
-                        className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
+                        className="w-full bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
                     >
                         {submitting ? "Submitting..." : "Submit Book"}
                     </button>

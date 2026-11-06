@@ -86,8 +86,8 @@ export default function InventoryPage() {
     };
 
     const statusBadge = (status) => {
-        if (status === "published") return "bg-gray-500/20 text-gray-400";
-        if (status === "unpublished") return "bg-gray-500/20 text-gray-400";
+        if (status === "published") return "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400";
+        if (status === "unpublished") return "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400";
         return "bg-yellow-500/20 text-yellow-400";
     };
 
@@ -149,13 +149,13 @@ export default function InventoryPage() {
                             <button
                                 onClick={handleUpdate}
                                 disabled={submitting}
-                                className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl transition disabled:opacity-50 text-sm"
+                                className="flex-1 bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white py-3 rounded-xl transition disabled:opacity-50 text-sm"
                             >
                                 {submitting ? "Saving..." : "Save Changes"}
                             </button>
                             <button
                                 onClick={() => setEditBook(null)}
-                                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl transition text-sm"
+                                className="flex-1 bg-gray-700 hover:from-gray-700 hover:to-gray-900 text-white py-3 rounded-xl transition text-sm"
                             >
                                 Cancel
                             </button>

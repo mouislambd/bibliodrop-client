@@ -163,7 +163,7 @@ export default function BookDetailsPage({ params }) {
             <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center text-white px-4">
                 <h2 className="text-2xl font-bold mb-2">Book not found</h2>
                 <p className="text-gray-400 mb-6">The book you're looking for doesn't exist or was removed.</p>
-                <Link href="/browse" className="bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-full text-sm">
+                <Link href="/browse" className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 px-5 py-2 rounded-full text-sm">
                     Back to Browse
                 </Link>
             </div>
@@ -251,7 +251,7 @@ export default function BookDetailsPage({ params }) {
                                 <button
                                     onClick={handleRequestDelivery}
                                     disabled={book.isCheckedOut || requesting}
-                                    className="bg-gray-500 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-3 rounded-full font-medium w-fit transition"
+                                    className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-3 rounded-full font-medium w-fit transition"
                                 >
                                     {requesting ? "Processing..." : book.isCheckedOut ? "Currently Unavailable" : "Request Delivery"}
                                 </button>

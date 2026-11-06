@@ -48,7 +48,7 @@ export default function UserDashboardLayout({ children }) {
                             href={link.href}
                             onClick={() => setSidebarOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${pathname === link.href
-                                    ? "bg-gray-500 text-white"
+                                    ? "bg-gradient-to-r from-gray-600 to-gray-800 text-white"
                                     : "text-gray-400 hover:bg-[#0f172a] hover:text-white"
                                 }`}
                         >

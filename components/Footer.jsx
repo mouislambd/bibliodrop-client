@@ -41,7 +41,7 @@ export default function Footer() {
                             placeholder="Your email"
                             className="bg-[#1e293b] text-white text-sm px-3 py-2 rounded-lg flex-1 outline-none border border-gray-700 focus:border-gray-400"
                         />
-                        <button className="bg-gray-500 hover:bg-gray-600 text-white text-sm px-4 py-2 rounded-lg transition">
+                        <button className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-2 rounded-lg transition">
                             Subscribe
                         </button>
                     </div>

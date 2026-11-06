@@ -70,7 +70,7 @@ export default function Navbar() {
                             />
                             <button
                                 onClick={() => signOut()}
-                                className="bg-gray-700 hover:bg-gray-600 text-white text-sm px-4 py-1.5 rounded-full transition"
+                                className="bg-gray-700 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-1.5 rounded-full transition"
                             >
                                 Logout
                             </button>
@@ -78,7 +78,7 @@ export default function Navbar() {
                     ) : (
                         <Link
                             href="/login"
-                            className="bg-gray-700 hover:bg-gray-600 text-white text-sm px-4 py-1.5 rounded-full transition"
+                            className="bg-gray-700 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-1.5 rounded-full transition"
                         >
                             Login
                         </Link>

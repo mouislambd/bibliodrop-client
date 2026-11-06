@@ -116,7 +116,7 @@ export default function BookApprovalPage() {
                                         <button
                                             disabled={actionId === book._id}
                                             onClick={() => handleApprove(book._id)}
-                                            className="btn btn-sm bg-gray-500 hover:bg-gray-600 text-white border-none"
+                                            className="btn btn-sm bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white border-none"
                                         >
                                             Approve & Publish
                                         </button>

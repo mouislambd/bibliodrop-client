@@ -178,7 +178,7 @@ function BrowseContent() {
                         <button
                             onClick={() => setPage((p) => Math.max(1, p - 1))}
                             disabled={page === 1}
-                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-gray-500 transition"
+                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-gradient-to-r from-gray-600 to-gray-800 transition"
                         >
                             Previous
                         </button>
@@ -187,8 +187,8 @@ function BrowseContent() {
                                 key={i}
                                 onClick={() => setPage(i + 1)}
                                 className={`px-4 py-2 rounded-lg text-sm transition ${page === i + 1
-                                    ? "bg-gray-500 text-white"
-                                    : "bg-[#1e293b] hover:bg-gray-500/30"
+                                    ? "bg-gradient-to-r from-gray-600 to-gray-800 text-white"
+                                    : "bg-[#1e293b] hover:bg-gradient-to-r from-gray-600 to-gray-800/30"
                                     }`}
                             >
                                 {i + 1}
@@ -197,7 +197,7 @@ function BrowseContent() {
                         <button
                             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                             disabled={page === totalPages}
-                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-gray-500 transition"
+                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-gradient-to-r from-gray-600 to-gray-800 transition"
                         >
                             Next
                         </button>

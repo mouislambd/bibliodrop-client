@@ -62,7 +62,7 @@ export default function ContactPage() {
                                 rows={4}
                                 className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                             />
-                            <button className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition">
+                            <button className="w-full bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white font-semibold py-3 rounded-xl transition">
                                 Send Message
                             </button>
                         </div>

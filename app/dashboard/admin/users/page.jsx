@@ -109,7 +109,7 @@ export default function ManageUsersPage() {
                                     <td className="p-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${user.role === "admin" ? "bg-red-500/20 text-red-400" :
                                             user.role === "librarian" ? "bg-blue-500/20 text-blue-400" :
-                                                "bg-gray-500/20 text-gray-400"
+                                                "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400"
                                             }`}>
                                             {user.role}
                                         </span>

@@ -68,10 +68,10 @@ export default function ManageBooksPage() {
     const statusBadge = (status) => {
         const map = {
             "pending_approval": "bg-amber-500/20 text-amber-400",
-            published: "bg-gray-500/20 text-gray-400",
-            unpublished: "bg-gray-500/20 text-gray-400",
+            published: "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400",
+            unpublished: "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400",
         };
-        return map[status] || "bg-gray-500/20 text-gray-400";
+        return map[status] || "bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400";
     };
 
     if (loading) {
@@ -122,7 +122,7 @@ export default function ManageBooksPage() {
                                             <button
                                                 disabled={actionId === book._id}
                                                 onClick={() => handleUnpublish(book._id)}
-                                                className="btn btn-sm bg-gray-900 hover:bg-gray-600 text-white border-none"
+                                                className="btn btn-sm bg-gray-900 hover:from-gray-700 hover:to-gray-900 text-white border-none"
                                             >
                                                 Unpublish
                                             </button>

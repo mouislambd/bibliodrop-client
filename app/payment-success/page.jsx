@@ -46,7 +46,7 @@ function PaymentSuccessContent() {
                         <p className="text-gray-400 mb-6">Your delivery request has been confirmed.</p>
                         <Link
                             href="/dashboard/user/history"
-                            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
+                            className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
                         >
                             View Delivery History
                             
@@ -59,7 +59,7 @@ function PaymentSuccessContent() {
                         <p className="text-gray-400 mb-6">Payment may have failed or already processed.</p>
                         <Link
                             href="/browse"
-                            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
+                            className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
                         >
                             Back to Browse
                         </Link>

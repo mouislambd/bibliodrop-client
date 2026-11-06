@@ -51,7 +51,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="bg-gray-500/20 text-gray-400 text-sm px-4 py-1 rounded-full mb-6 inline-block">
+            <span className="bg-gradient-to-r from-gray-600 to-gray-800/20 text-gray-400 text-sm px-4 py-1 rounded-full mb-6 inline-block">
               📚 Books Delivered to Your Door
             </span>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
@@ -63,7 +63,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/browse"
-              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white font-semibold px-8 py-3 rounded-full transition text-lg"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white font-semibold px-8 py-3 rounded-full transition text-lg"
             >
               Browse Books <FiArrowRight />
             </Link>
@@ -172,7 +172,7 @@ export default function HomePage() {
             >
               <Link
                 href={`/browse?category=${cat.name}`}
-                className="bg-[#1e293b] hover:bg-gray-500/20 border border-gray-700 hover:border-gray-400 rounded-xl p-6 flex flex-col items-center gap-3 transition group"
+                className="bg-[#1e293b] hover:bg-gradient-to-r from-gray-600 to-gray-800/20 border border-gray-700 hover:border-gray-400 rounded-xl p-6 flex flex-col items-center gap-3 transition group"
               >
                 <span className="text-4xl">{cat.icon}</span>
                 <span className="text-sm font-medium group-hover:text-gray-400 transition">{cat.name}</span>
