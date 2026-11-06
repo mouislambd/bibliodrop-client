@@ -44,7 +44,7 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="min-h-[90vh] w-full bg-cover bg-center relative" style={{ backgroundImage: "url('/hero.png')" }}>
-        <div className="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-[1px]"></div>
         <div className="relative z-10 w-full min-h-[90vh] flex flex-col items-center justify-center text-center px-4 py-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
