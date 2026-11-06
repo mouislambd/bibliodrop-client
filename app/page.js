@@ -71,6 +71,40 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* New Section: Trending Books */}
+      <section className="max-w-7xl mx-auto px-4 py-16 bg-[#1e293b] rounded-2xl my-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-center mb-10"
+        >
+          Trending <span className="text-gray-400">Books</span>
+        </motion.h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { title: "The Great Gatsby", author: "F. Scott Fitzgerald", image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=400" },
+            { title: "1984", author: "George Orwell", image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=400" },
+            { title: "To Kill a Mockingbird", author: "Harper Lee", image: "https://images.unsplash.com/photo-1506443432602-ac2fcd6fff38?auto=format&fit=crop&q=80&w=400" },
+            { title: "Pride and Prejudice", author: "Jane Austen", image: "https://images.unsplash.com/photo-1531988042230-0973600a3598?auto=format&fit=crop&q=80&w=400" },
+          ].map((book, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-[#0f172a] rounded-xl overflow-hidden"
+            >
+              <img src={book.image} alt={book.title} className="w-full h-40 object-cover" />
+              <div className="p-3">
+                <h3 className="font-semibold text-sm truncate">{book.title}</h3>
+                <p className="text-gray-400 text-xs">{book.author}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Featured Books */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <motion.h2
