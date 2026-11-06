@@ -43,29 +43,31 @@ export default function HomePage() {
     <div className="bg-[#0f172a] text-white">
 
       {/* Hero */}
-      <section className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="bg-emerald-500/20 text-emerald-400 text-sm px-4 py-1 rounded-full mb-6 inline-block">
-            📚 Books Delivered to Your Door
-          </span>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Your Local Library,{" "}
-            <span className="text-emerald-400">Delivered</span>
-          </h1>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto mb-8">
-            Browse thousands of books from local libraries and independent owners. Request delivery and enjoy reading from the comfort of your home.
-          </p>
-          <Link
-            href="/browse"
-            className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 rounded-full transition text-lg"
+      <section className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 bg-cover bg-center" style={{ backgroundImage: "url('/hero.png')" }}>
+        <div className="bg-[#0f172a]/70 w-full min-h-[90vh] flex flex-col items-center justify-center px-4 py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            Browse Books <FiArrowRight />
-          </Link>
-        </motion.div>
+            <span className="bg-emerald-500/20 text-emerald-400 text-sm px-4 py-1 rounded-full mb-6 inline-block">
+              📚 Books Delivered to Your Door
+            </span>
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+              Your Local Library,{" "}
+              <span className="text-emerald-400">Delivered</span>
+            </h1>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto mb-8">
+              Browse thousands of books from local libraries and independent owners. Request delivery and enjoy reading from the comfort of your home.
+            </p>
+            <Link
+              href="/browse"
+              className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 rounded-full transition text-lg"
+            >
+              Browse Books <FiArrowRight />
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
       {/* Featured Books */}
