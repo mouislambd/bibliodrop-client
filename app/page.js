@@ -100,11 +100,11 @@ export default function HomePage() {
               >
                 <Link href={`/books/${book._id}`}>
                   <div className="bg-[#1e293b] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 h-full">
-                    <img
-                      src={book.coverImage}
-                      alt={book.title}
-                      className="w-full h-48 object-cover"
-                    />
+                      <img
+                        src={book.coverImage}
+                        alt={book.title}
+                        className="w-full h-48 object-cover bg-[#0f172a]"
+                      />
                     <div className="p-3">
                       <h3 className="font-semibold text-sm truncate">{book.title}</h3>
                       <p className="text-gray-400 text-xs">{book.author}</p>
@@ -141,7 +141,7 @@ export default function HomePage() {
                 <img
                   src={lib.avatar}
                   alt={lib.name}
-                  className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-400"
+                  className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-400 bg-[#1e293b]"
                 />
                 <h3 className="font-semibold text-lg">{lib.name}</h3>
                 <p className="text-emerald-400 text-sm">{lib.deliveries} deliveries completed</p>
