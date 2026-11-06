@@ -31,14 +31,14 @@ export default function LibrarianDeliveriesPage() {
     };
 
     const statusBadge = (status) => {
-        if (status === "delivered") return "bg-emerald-500/20 text-emerald-400";
+        if (status === "delivered") return "bg-gray-500/20 text-gray-400";
         if (status === "dispatched") return "bg-blue-500/20 text-blue-400";
         return "bg-yellow-500/20 text-yellow-400";
     };
 
     if (loading) return (
         <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -68,7 +68,7 @@ export default function LibrarianDeliveriesPage() {
                                     <tr key={d._id} className="border-b border-gray-800 hover:bg-[#0f172a] transition">
                                         <td className="px-4 py-3">{d.user?.name || "N/A"}</td>
                                         <td className="px-4 py-3">{d.book?.title || "N/A"}</td>
-                                        <td className="px-4 py-3 text-emerald-400">৳{d.deliveryFee}</td>
+                                        <td className="px-4 py-3 text-gray-400">৳{d.deliveryFee}</td>
                                         <td className="px-4 py-3 text-gray-400">
                                             {new Date(d.createdAt).toLocaleDateString()}
                                         </td>
@@ -89,7 +89,7 @@ export default function LibrarianDeliveriesPage() {
                                             {d.status === "dispatched" && (
                                                 <button
                                                     onClick={() => handleStatusUpdate(d._id, "delivered")}
-                                                    className="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-lg hover:bg-emerald-500/40 transition"
+                                                    className="text-xs bg-gray-500/20 text-gray-400 px-3 py-1 rounded-lg hover:bg-gray-500/40 transition"
                                                 >
                                                     Mark Delivered
                                                 </button>

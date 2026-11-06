@@ -38,7 +38,7 @@ export default function LibrarianOverviewPage() {
 
     if (loading) return (
         <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -54,7 +54,7 @@ export default function LibrarianOverviewPage() {
                     { label: "Pending Requests", value: pendingCount, icon: <FiClock /> },
                 ].map((stat, i) => (
                     <div key={i} className="bg-[#1e293b] rounded-xl p-5 flex items-center gap-4">
-                        <div className="text-2xl text-emerald-400">{stat.icon}</div>
+                        <div className="text-2xl text-gray-400">{stat.icon}</div>
                         <div>
                             <p className="text-gray-400 text-sm">{stat.label}</p>
                             <p className="text-2xl font-bold">{stat.value}</p>

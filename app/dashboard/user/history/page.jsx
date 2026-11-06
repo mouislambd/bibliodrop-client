@@ -18,7 +18,7 @@ export default function DeliveryHistoryPage() {
 
     if (loading) return (
         <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -45,10 +45,10 @@ export default function DeliveryHistoryPage() {
                                     {deliveries.map((d) => (
                                         <tr key={d._id} className="border-b border-gray-800 hover:bg-[#0f172a] transition">
                                             <td className="px-4 py-3">{d.book?.title || "N/A"}</td>
-                                            <td className="px-4 py-3 text-emerald-400">৳{d.deliveryFee}</td>
+                                            <td className="px-4 py-3 text-gray-400">৳{d.deliveryFee}</td>
                                             <td className="px-4 py-3 text-gray-400">{new Date(d.createdAt).toLocaleDateString()}</td>
                                             <td className="px-4 py-3">
-                                                <span className={`px-2 py-0.5 rounded-full text-xs ${d.status === "delivered" ? "bg-emerald-500/20 text-emerald-400" :
+                                                <span className={`px-2 py-0.5 rounded-full text-xs ${d.status === "delivered" ? "bg-gray-500/20 text-gray-400" :
                                                         d.status === "dispatched" ? "bg-blue-500/20 text-blue-400" :
                                                             "bg-yellow-500/20 text-yellow-400"
                                                     }`}>

@@ -111,12 +111,12 @@ export default function BookApprovalPage() {
                                     <td className="p-4 font-medium">{book.title}</td>
                                     <td className="p-4 text-gray-400">{book.librarian?.email}</td>
                                     <td className="p-4 text-gray-400">{book.category}</td>
-                                    <td className="p-4 text-emerald-400">${book.deliveryFee}</td>
+                                    <td className="p-4 text-gray-400">${book.deliveryFee}</td>
                                     <td className="p-4 text-center space-x-2">
                                         <button
                                             disabled={actionId === book._id}
                                             onClick={() => handleApprove(book._id)}
-                                            className="btn btn-sm bg-emerald-500 hover:bg-emerald-600 text-white border-none"
+                                            className="btn btn-sm bg-gray-500 hover:bg-gray-600 text-white border-none"
                                         >
                                             Approve & Publish
                                         </button>

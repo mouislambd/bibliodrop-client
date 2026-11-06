@@ -42,7 +42,7 @@ export default function ChooseRolePage() {
 
     if (isPending || !session?.user) return (
         <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -50,7 +50,7 @@ export default function ChooseRolePage() {
         <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-4">
             <div className="bg-[#1e293b] rounded-2xl p-8 w-full max-w-md shadow-2xl text-white text-center">
 
-                <div className="flex items-center justify-center gap-2 text-emerald-400 font-bold text-2xl mb-2">
+                <div className="flex items-center justify-center gap-2 text-gray-400 font-bold text-2xl mb-2">
                     <FiBookOpen size={28} />
                     BiblioDrop
                 </div>
@@ -65,11 +65,11 @@ export default function ChooseRolePage() {
                     <button
                         onClick={() => handleRoleSelect("user")}
                         disabled={selecting}
-                        className="bg-[#0f172a] hover:bg-emerald-500/20 border-2 border-gray-700 hover:border-emerald-400 rounded-2xl p-6 flex flex-col items-center gap-3 transition group disabled:opacity-50"
+                        className="bg-[#0f172a] hover:bg-gray-500/20 border-2 border-gray-700 hover:border-gray-400 rounded-2xl p-6 flex flex-col items-center gap-3 transition group disabled:opacity-50"
                     >
-                        <FiUser size={36} className="text-emerald-400" />
+                        <FiUser size={36} className="text-gray-400" />
                         <div>
-                            <p className="font-semibold group-hover:text-emerald-400 transition">Reader</p>
+                            <p className="font-semibold group-hover:text-gray-400 transition">Reader</p>
                             <p className="text-gray-400 text-xs mt-1">Browse & request book delivery</p>
                         </div>
                     </button>

@@ -86,14 +86,14 @@ export default function InventoryPage() {
     };
 
     const statusBadge = (status) => {
-        if (status === "published") return "bg-emerald-500/20 text-emerald-400";
+        if (status === "published") return "bg-gray-500/20 text-gray-400";
         if (status === "unpublished") return "bg-gray-500/20 text-gray-400";
         return "bg-yellow-500/20 text-yellow-400";
     };
 
     if (loading) return (
         <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -110,25 +110,25 @@ export default function InventoryPage() {
                             placeholder="Title"
                             value={form.title}
                             onChange={(e) => setForm({ ...form, title: e.target.value })}
-                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                         <input
                             placeholder="Author"
                             value={form.author}
                             onChange={(e) => setForm({ ...form, author: e.target.value })}
-                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                         <input
                             placeholder="Delivery Fee"
                             type="number"
                             value={form.deliveryFee}
                             onChange={(e) => setForm({ ...form, deliveryFee: e.target.value })}
-                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                         <select
                             value={form.category}
                             onChange={(e) => setForm({ ...form, category: e.target.value })}
-                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         >
                             {categories.map((c) => <option key={c}>{c}</option>)}
                         </select>
@@ -137,7 +137,7 @@ export default function InventoryPage() {
                             value={form.description}
                             onChange={(e) => setForm({ ...form, description: e.target.value })}
                             rows={3}
-                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm md:col-span-2"
+                            className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm md:col-span-2"
                         />
                         <input
                             type="file"
@@ -149,7 +149,7 @@ export default function InventoryPage() {
                             <button
                                 onClick={handleUpdate}
                                 disabled={submitting}
-                                className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-xl transition disabled:opacity-50 text-sm"
+                                className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl transition disabled:opacity-50 text-sm"
                             >
                                 {submitting ? "Saving..." : "Save Changes"}
                             </button>
@@ -195,7 +195,7 @@ export default function InventoryPage() {
                                         </td>
                                         <td className="px-4 py-3 font-medium">{book.title}</td>
                                         <td className="px-4 py-3 text-gray-400">{book.category}</td>
-                                        <td className="px-4 py-3 text-emerald-400">৳{book.deliveryFee}</td>
+                                        <td className="px-4 py-3 text-gray-400">৳{book.deliveryFee}</td>
                                         <td className="px-4 py-3">
                                             <span className={`px-2 py-0.5 rounded-full text-xs ${statusBadge(book.status)}`}>
                                                 {book.status.replace("_", " ")}

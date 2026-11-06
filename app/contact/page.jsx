@@ -12,7 +12,7 @@ export default function ContactPage() {
                     className="text-center mb-16"
                 >
                     <h1 className="text-4xl font-bold mb-4">
-                        Contact <span className="text-emerald-400">Us</span>
+                        Contact <span className="text-gray-400">Us</span>
                     </h1>
                     <p className="text-gray-400 text-lg">
                         Have questions? We'd love to hear from you.
@@ -31,7 +31,7 @@ export default function ContactPage() {
                             { icon: FiMapPin, label: "Address", value: "Dhaka, Bangladesh" },
                         ].map((item, i) => (
                             <div key={i} className="bg-[#1e293b] rounded-2xl p-6 flex items-center gap-4">
-                                <item.icon className="text-emerald-400 flex-shrink-0" size={24} />
+                                <item.icon className="text-gray-400 flex-shrink-0" size={24} />
                                 <div>
                                     <p className="text-gray-400 text-sm">{item.label}</p>
                                     <p className="font-medium">{item.value}</p>
@@ -50,19 +50,19 @@ export default function ContactPage() {
                             <input
                                 type="text"
                                 placeholder="Your Name"
-                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                             />
                             <input
                                 type="email"
                                 placeholder="Your Email"
-                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                             />
                             <textarea
                                 placeholder="Your Message"
                                 rows={4}
-                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                             />
-                            <button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition">
+                            <button className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition">
                                 Send Message
                             </button>
                         </div>

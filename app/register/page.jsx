@@ -82,7 +82,7 @@ export default function RegisterPage() {
             <div className="bg-[#1e293b] rounded-2xl p-8 w-full max-w-md shadow-2xl">
 
                 {/* Logo */}
-                <div className="flex items-center justify-center gap-2 text-emerald-400 font-bold text-2xl mb-2">
+                <div className="flex items-center justify-center gap-2 text-gray-400 font-bold text-2xl mb-2">
                     <FiBookOpen size={28} />
                     BiblioDrop
                 </div>
@@ -114,7 +114,7 @@ export default function RegisterPage() {
                             placeholder="Full Name"
                             value={form.name}
                             onChange={handleChange}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -127,7 +127,7 @@ export default function RegisterPage() {
                             placeholder="Email address"
                             value={form.email}
                             onChange={handleChange}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -140,7 +140,7 @@ export default function RegisterPage() {
                             placeholder="Password"
                             value={form.password}
                             onChange={handleChange}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -153,7 +153,7 @@ export default function RegisterPage() {
                             placeholder="Confirm Password"
                             value={form.confirmPassword}
                             onChange={handleChange}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -164,7 +164,7 @@ export default function RegisterPage() {
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImageFile(e.target.files[0])}
-                            className="w-full bg-[#0f172a] text-gray-400 pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-gray-400 pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -173,7 +173,7 @@ export default function RegisterPage() {
                         name="role"
                         value={form.role}
                         onChange={handleChange}
-                        className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                        className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                     >
                         <option value="user">User (Reader)</option>
                         <option value="librarian">Librarian</option>
@@ -183,7 +183,7 @@ export default function RegisterPage() {
                     <button
                         onClick={handleRegister}
                         disabled={loading}
-                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
+                        className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
                  >
                         {loading ? "Creating account..." : "Register"}
                     </button>
@@ -191,7 +191,7 @@ export default function RegisterPage() {
 
                 <p className="text-center text-gray-400 text-sm mt-6">
                     Already have an account?{" "}
-                    <Link href="/login" className="text-emerald-400 hover:underline">
+                    <Link href="/login" className="text-gray-400 hover:underline">
                         Login
                     </Link>
                 </p>

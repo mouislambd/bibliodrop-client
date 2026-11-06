@@ -32,7 +32,7 @@ function PaymentSuccessContent() {
 
     if (status === "loading") return (
         <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -41,12 +41,12 @@ function PaymentSuccessContent() {
             <div className="bg-[#1e293b] rounded-2xl p-10 text-center max-w-md w-full">
                 {status === "success" ? (
                     <>
-                        <FiCheckCircle size={60} className="text-emerald-400 mx-auto mb-4" />
+                        <FiCheckCircle size={60} className="text-gray-400 mx-auto mb-4" />
                         <h1 className="text-2xl font-bold text-white mb-2">Payment Successful!</h1>
                         <p className="text-gray-400 mb-6">Your delivery request has been confirmed.</p>
                         <Link
                             href="/dashboard/user/history"
-                            className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
                         >
                             View Delivery History
                             
@@ -59,7 +59,7 @@ function PaymentSuccessContent() {
                         <p className="text-gray-400 mb-6">Payment may have failed or already processed.</p>
                         <Link
                             href="/browse"
-                            className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
                         >
                             Back to Browse
                         </Link>
@@ -74,7 +74,7 @@ export default function PaymentSuccessPage() {
     return (
         <Suspense fallback={
             <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
-                <div className="w-10 h-10 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
             </div>
         }>
             <PaymentSuccessContent />

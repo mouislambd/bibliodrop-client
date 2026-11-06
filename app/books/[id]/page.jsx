@@ -163,7 +163,7 @@ export default function BookDetailsPage({ params }) {
             <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center text-white px-4">
                 <h2 className="text-2xl font-bold mb-2">Book not found</h2>
                 <p className="text-gray-400 mb-6">The book you're looking for doesn't exist or was removed.</p>
-                <Link href="/browse" className="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-full text-sm">
+                <Link href="/browse" className="bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-full text-sm">
                     Back to Browse
                 </Link>
             </div>
@@ -173,7 +173,7 @@ export default function BookDetailsPage({ params }) {
     return (
         <div className="min-h-screen bg-[#0f172a] text-white px-4 py-10">
             <div className="max-w-6xl mx-auto">
-                <Link href="/browse" className="inline-flex items-center gap-2 text-gray-400 hover:text-emerald-400 text-sm mb-8">
+                <Link href="/browse" className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-400 text-sm mb-8">
                     <FiArrowLeft /> Back to Browse
                 </Link>
 
@@ -198,7 +198,7 @@ export default function BookDetailsPage({ params }) {
 
                     {/* Info */}
                     <div className="flex flex-col">
-                        <span className="text-xs text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full w-fit mb-3">
+                        <span className="text-xs text-gray-400 bg-gray-400/10 px-3 py-1 rounded-full w-fit mb-3">
                             {book.category}
                         </span>
                         <h1 className="text-3xl font-bold mb-2">{book.title}</h1>
@@ -217,7 +217,7 @@ export default function BookDetailsPage({ params }) {
                             </span>
                         </div>
 
-                        <p className="text-2xl font-bold text-emerald-400 mb-6">
+                        <p className="text-2xl font-bold text-gray-400 mb-6">
                             ৳{book.deliveryFee}{" "}
                             <span className="text-sm text-gray-400 font-normal">delivery fee</span>
                         </p>
@@ -251,7 +251,7 @@ export default function BookDetailsPage({ params }) {
                                 <button
                                     onClick={handleRequestDelivery}
                                     disabled={book.isCheckedOut || requesting}
-                                    className="bg-emerald-500 hover:bg-emerald-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-3 rounded-full font-medium w-fit transition"
+                                    className="bg-gray-500 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-3 rounded-full font-medium w-fit transition"
                                 >
                                     {requesting ? "Processing..." : book.isCheckedOut ? "Currently Unavailable" : "Request Delivery"}
                                 </button>
@@ -306,7 +306,7 @@ export default function BookDetailsPage({ params }) {
                                         <div className="flex">
                                             {[...Array(5)].map((_, i) =>
                                                 i < review.rating ? (
-                                                    <FaStar key={i} className="text-emerald-400" size={14} />
+                                                    <FaStar key={i} className="text-gray-400" size={14} />
                                                 ) : (
                                                     <FaRegStar key={i} className="text-gray-600" size={14} />
                                                 )

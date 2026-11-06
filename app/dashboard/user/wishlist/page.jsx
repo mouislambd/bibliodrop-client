@@ -65,7 +65,7 @@ export default function WishlistPage() {
                         <p className="text-gray-400 mb-4">Your wishlist is empty.</p>
                         <Link
                             href="/browse"
-                            className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-full text-sm transition"
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-full text-sm transition"
                         >
                             Browse Books
                         </Link>
@@ -99,12 +99,12 @@ export default function WishlistPage() {
                                                 className="w-full h-52 object-cover"
                                             />
                                             <div className="p-4 flex flex-col flex-1">
-                                                <span className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full w-fit mb-2">
+                                                <span className="text-xs text-gray-400 bg-gray-400/10 px-2 py-0.5 rounded-full w-fit mb-2">
                                                     {book.category}
                                                 </span>
                                                 <h3 className="font-semibold text-sm line-clamp-2 flex-1">{book.title}</h3>
                                                 <p className="text-gray-400 text-xs mt-1">{book.author}</p>
-                                                <p className="text-emerald-400 font-bold mt-2">৳{book.deliveryFee}</p>
+                                                <p className="text-gray-400 font-bold mt-2">৳{book.deliveryFee}</p>
                                             </div>
                                         </div>
                                     </Link>

@@ -32,7 +32,7 @@ export default function AdminDashboardLayout({ children }) {
 
     if (isPending || !session?.user) return (
         <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 

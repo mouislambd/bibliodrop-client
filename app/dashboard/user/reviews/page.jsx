@@ -52,7 +52,7 @@ export default function MyReviewsPage() {
 
     if (loading) return (
         <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -83,12 +83,12 @@ export default function MyReviewsPage() {
                                         value={editComment}
                                         onChange={(e) => setEditComment(e.target.value)}
                                         rows={3}
-                                        className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                                        className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                                     />
                                     <div className="flex gap-2">
                                         <button
                                             onClick={() => handleEdit(review._id)}
-                                            className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm transition"
+                                            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-xl text-sm transition"
                                         >
                                             Save
                                         </button>

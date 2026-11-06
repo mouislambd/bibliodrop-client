@@ -22,7 +22,7 @@ export default function ReadingListPage() {
 
     if (loading) return (
         <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
         </div>
     );
 
@@ -45,7 +45,7 @@ export default function ReadingListPage() {
                                 />
                                 <div className="p-3">
                                     <h3 className="font-semibold text-sm truncate">{d.book?.title}</h3>
-                                    <span className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full mt-1 inline-block">
+                                    <span className="text-xs text-gray-400 bg-gray-400/10 px-2 py-0.5 rounded-full mt-1 inline-block">
                                         Delivered
                                     </span>
                                 </div>

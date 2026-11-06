@@ -65,7 +65,7 @@ function BrowseContent() {
                     className="text-center mb-10"
                 >
                     <h1 className="text-4xl font-bold mb-2">
-                        Browse <span className="text-emerald-400">Books</span>
+                        Browse <span className="text-gray-400">Books</span>
                     </h1>
                     <p className="text-gray-400">Explore our collection and request delivery</p>
                 </motion.div>
@@ -80,7 +80,7 @@ function BrowseContent() {
                             placeholder="Search by title or author..."
                             value={search}
                             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -88,7 +88,7 @@ function BrowseContent() {
                     <select
                         value={category}
                         onChange={(e) => { setCategory(e.target.value); setPage(1); }}
-                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                     >
                         {categories.map((cat) => (
                             <option key={cat} value={cat}>{cat}</option>
@@ -99,7 +99,7 @@ function BrowseContent() {
                     <select
                         value={availability}
                         onChange={(e) => { setAvailability(e.target.value); setPage(1); }}
-                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                     >
                         <option value="All">All Status</option>
                         <option value="available">Available</option>
@@ -112,14 +112,14 @@ function BrowseContent() {
                         placeholder="Min Fee (৳)"
                         value={minFee}
                         onChange={(e) => { setMinFee(e.target.value); setPage(1); }}
-                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                     />
                     <input
                         type="number"
                         placeholder="Max Fee (৳)"
                         value={maxFee}
                         onChange={(e) => { setMaxFee(e.target.value); setPage(1); }}
-                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                        className="bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                     />
                 </div>
 
@@ -158,12 +158,12 @@ function BrowseContent() {
                                             )}
                                         </div>
                                         <div className="p-4 flex flex-col flex-1">
-                                            <span className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full w-fit mb-2">
+                                            <span className="text-xs text-gray-400 bg-gray-400/10 px-2 py-0.5 rounded-full w-fit mb-2">
                                                 {book.category}
                                             </span>
                                             <h3 className="font-semibold text-sm line-clamp-2 flex-1">{book.title}</h3>
                                             <p className="text-gray-400 text-xs mt-1">{book.author}</p>
-                                            <p className="text-emerald-400 font-bold mt-2">৳{book.deliveryFee}</p>
+                                            <p className="text-gray-400 font-bold mt-2">৳{book.deliveryFee}</p>
                                         </div>
                                     </div>
                                 </Link>
@@ -178,7 +178,7 @@ function BrowseContent() {
                         <button
                             onClick={() => setPage((p) => Math.max(1, p - 1))}
                             disabled={page === 1}
-                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-emerald-500 transition"
+                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-gray-500 transition"
                         >
                             Previous
                         </button>
@@ -187,8 +187,8 @@ function BrowseContent() {
                                 key={i}
                                 onClick={() => setPage(i + 1)}
                                 className={`px-4 py-2 rounded-lg text-sm transition ${page === i + 1
-                                    ? "bg-emerald-500 text-white"
-                                    : "bg-[#1e293b] hover:bg-emerald-500/30"
+                                    ? "bg-gray-500 text-white"
+                                    : "bg-[#1e293b] hover:bg-gray-500/30"
                                     }`}
                             >
                                 {i + 1}
@@ -197,7 +197,7 @@ function BrowseContent() {
                         <button
                             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                             disabled={page === totalPages}
-                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-emerald-500 transition"
+                            className="px-4 py-2 bg-[#1e293b] rounded-lg text-sm disabled:opacity-40 hover:bg-gray-500 transition"
                         >
                             Next
                         </button>

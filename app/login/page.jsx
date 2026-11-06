@@ -53,7 +53,7 @@ export default function LoginPage() {
             <div className="bg-[#1e293b] rounded-2xl p-8 w-full max-w-md shadow-2xl">
 
                 {/* Logo */}
-                <div className="flex items-center justify-center gap-2 text-emerald-400 font-bold text-2xl mb-2">
+                <div className="flex items-center justify-center gap-2 text-gray-400 font-bold text-2xl mb-2">
                     <FiBookOpen size={28} />
                     BiblioDrop
                 </div>
@@ -83,7 +83,7 @@ export default function LoginPage() {
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -94,14 +94,14 @@ export default function LoginPage() {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
                     <button
                         onClick={handleLogin}
                         disabled={loading}
-                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
+                        className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
                     >
                         {loading ? "Logging in..." : "Login"}
                     </button>
@@ -109,7 +109,7 @@ export default function LoginPage() {
 
                 <p className="text-center text-gray-400 text-sm mt-6">
                     Don't have an account?{" "}
-                    <Link href="/register" className="text-emerald-400 hover:underline">
+                    <Link href="/register" className="text-gray-400 hover:underline">
                         Register
                     </Link>
                 </p>

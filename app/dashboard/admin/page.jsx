@@ -45,7 +45,7 @@ export default function AdminOverviewPage() {
     }
 
     const cards = [
-        { label: "Total Users", value: stats?.totalUsers ?? 0, icon: <FiUsers />, color: "text-emerald-400" },
+        { label: "Total Users", value: stats?.totalUsers ?? 0, icon: <FiUsers />, color: "text-gray-400" },
         { label: "Total Books", value: stats?.totalBooks ?? 0, icon: <FiBook />, color: "text-blue-400" },
         { label: "Total Deliveries", value: stats?.totalDeliveries ?? 0, icon: <FiTruck />, color: "text-amber-400" },
         { label: "Total Revenue", value: `৳${(stats?.totalRevenue ?? 0).toFixed(2)}`, icon: <FiDollarSign />, color: "text-pink-400" },

@@ -12,7 +12,7 @@ export default function AboutPage() {
                     className="text-center mb-16"
                 >
                     <h1 className="text-4xl font-bold mb-4">
-                        About <span className="text-emerald-400">BiblioDrop</span>
+                        About <span className="text-gray-400">BiblioDrop</span>
                     </h1>
                     <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                         BiblioDrop connects avid readers and students with local libraries
@@ -45,7 +45,7 @@ export default function AboutPage() {
                             transition={{ delay: i * 0.1 }}
                             className="bg-[#1e293b] rounded-2xl p-6 text-center"
                         >
-                            <item.icon className="text-emerald-400 mx-auto mb-4" size={36} />
+                            <item.icon className="text-gray-400 mx-auto mb-4" size={36} />
                             <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                             <p className="text-gray-400 text-sm">{item.desc}</p>
                         </motion.div>

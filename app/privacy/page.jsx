@@ -44,7 +44,7 @@ export default function PrivacyPage() {
                     className="text-center mb-12"
                 >
                     <h1 className="text-4xl font-bold mb-4">
-                        Privacy <span className="text-emerald-400">Policy</span>
+                        Privacy <span className="text-gray-400">Policy</span>
                     </h1>
                     <p className="text-gray-400">Last updated: July 2026</p>
                 </motion.div>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
                             transition={{ delay: i * 0.05 }}
                             className="bg-[#1e293b] rounded-2xl p-6"
                         >
-                            <h2 className="text-lg font-bold text-emerald-400 mb-3">
+                            <h2 className="text-lg font-bold text-gray-400 mb-3">
                                 {section.title}
                             </h2>
                             <p className="text-gray-400 leading-relaxed text-sm">

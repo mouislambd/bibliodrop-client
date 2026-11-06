@@ -33,7 +33,7 @@ export default function LibrarianDashboardLayout({ children }) {
                     <img
                         src={session?.user?.image || "https://i.pravatar.cc/100"}
                         alt="avatar"
-                        className="w-12 h-12 rounded-full border-2 border-emerald-400 mb-3"
+                        className="w-12 h-12 rounded-full border-2 border-gray-400 mb-3"
                     />
                     <p className="font-semibold text-sm">{session?.user?.name}</p>
                     <p className="text-gray-400 text-xs">Librarian</p>
@@ -47,7 +47,7 @@ export default function LibrarianDashboardLayout({ children }) {
                             href={link.href}
                             onClick={() => setSidebarOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition ${pathname === link.href
-                                    ? "bg-emerald-500 text-white"
+                                    ? "bg-gray-500 text-white"
                                     : "text-gray-400 hover:bg-[#0f172a] hover:text-white"
                                 }`}
                         >

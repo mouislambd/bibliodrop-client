@@ -75,7 +75,7 @@ export default function AddBookPage() {
                 <div className="mb-6">
                     <label className="block text-sm text-gray-400 mb-2">Book Cover *</label>
                     <div
-                        className="border-2 border-dashed border-gray-700 rounded-xl p-6 text-center cursor-pointer hover:border-emerald-400 transition"
+                        className="border-2 border-dashed border-gray-700 rounded-xl p-6 text-center cursor-pointer hover:border-gray-400 transition"
                         onClick={() => document.getElementById("coverInput").click()}
                     >
                         {preview ? (
@@ -105,7 +105,7 @@ export default function AddBookPage() {
                             value={form.title}
                             onChange={handleChange}
                             placeholder="Book title"
-                            className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -116,7 +116,7 @@ export default function AddBookPage() {
                             value={form.author}
                             onChange={handleChange}
                             placeholder="Author name"
-                            className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -129,7 +129,7 @@ export default function AddBookPage() {
                                 value={form.deliveryFee}
                                 onChange={handleChange}
                                 placeholder="e.g. 50"
-                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                             />
                         </div>
                         <div>
@@ -138,7 +138,7 @@ export default function AddBookPage() {
                                 name="category"
                                 value={form.category}
                                 onChange={handleChange}
-                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                                className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                             >
                                 {categories.map((c) => <option key={c}>{c}</option>)}
                             </select>
@@ -153,7 +153,7 @@ export default function AddBookPage() {
                             onChange={handleChange}
                             placeholder="Book description..."
                             rows={4}
-                            className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-emerald-400 outline-none text-sm"
+                            className="w-full bg-[#0f172a] text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-gray-400 outline-none text-sm"
                         />
                     </div>
 
@@ -166,7 +166,7 @@ export default function AddBookPage() {
                     <button
                         onClick={handleSubmit}
                         disabled={submitting}
-                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
+                        className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
                     >
                         {submitting ? "Submitting..." : "Submit Book"}
                     </button>
