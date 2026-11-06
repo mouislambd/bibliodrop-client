@@ -51,19 +51,19 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="bg-emerald-500/20 text-emerald-400 text-sm px-4 py-1 rounded-full mb-6 inline-block">
+            <span className="bg-gray-500/20 text-gray-400 text-sm px-4 py-1 rounded-full mb-6 inline-block">
               📚 Books Delivered to Your Door
             </span>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               Your Local Library,{" "}
-              <span className="text-emerald-400">Delivered</span>
+              <span className="text-gray-400">Delivered</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-xl mx-auto mb-8">
               Browse thousands of books from local libraries and independent owners. Request delivery and enjoy reading from the comfort of your home.
             </p>
             <Link
               href="/browse"
-              className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 rounded-full transition text-lg"
+              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white font-semibold px-8 py-3 rounded-full transition text-lg"
             >
               Browse Books <FiArrowRight />
             </Link>
@@ -79,7 +79,7 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
           className="text-3xl font-bold text-center mb-10"
         >
-          Featured <span className="text-emerald-400">Books</span>
+          Featured <span className="text-gray-400">Books</span>
         </motion.h2>
 
         {loading ? (
@@ -101,15 +101,15 @@ export default function HomePage() {
               >
                 <Link href={`/books/${book._id}`}>
                   <div className="bg-[#1e293b] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 h-full">
-                      <img
-                        src={book.coverImage}
-                        alt={book.title}
-                        className="w-full h-48 object-cover bg-[#0f172a]"
-                      />
+                    <img
+                      src={book.coverImage}
+                      alt={book.title}
+                      className="w-full h-48 object-cover bg-[#0f172a]"
+                    />
                     <div className="p-3">
                       <h3 className="font-semibold text-sm truncate">{book.title}</h3>
                       <p className="text-gray-400 text-xs">{book.author}</p>
-                      <p className="text-emerald-400 text-sm font-bold mt-1">৳{book.deliveryFee}</p>
+                      <p className="text-gray-400 text-sm font-bold mt-1">৳{book.deliveryFee}</p>
                     </div>
                   </div>
                 </Link>
@@ -128,7 +128,7 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="text-3xl font-bold text-center mb-10"
           >
-            Top <span className="text-emerald-400">Librarians</span>
+            Top <span className="text-gray-400">Librarians</span>
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {topLibrarians.map((lib, i) => (
@@ -142,10 +142,10 @@ export default function HomePage() {
                 <img
                   src={lib.avatar}
                   alt={lib.name}
-                  className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-400 bg-[#1e293b]"
+                  className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-gray-400 bg-[#1e293b]"
                 />
                 <h3 className="font-semibold text-lg">{lib.name}</h3>
-                <p className="text-emerald-400 text-sm">{lib.deliveries} deliveries completed</p>
+                <p className="text-gray-400 text-sm">{lib.deliveries} deliveries completed</p>
               </motion.div>
             ))}
           </div>
@@ -160,7 +160,7 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
           className="text-3xl font-bold text-center mb-10"
         >
-          Popular <span className="text-emerald-400">Categories</span>
+          Popular <span className="text-gray-400">Categories</span>
         </motion.h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {categories.map((cat, i) => (
@@ -172,10 +172,10 @@ export default function HomePage() {
             >
               <Link
                 href={`/browse?category=${cat.name}`}
-                className="bg-[#1e293b] hover:bg-emerald-500/20 border border-gray-700 hover:border-emerald-400 rounded-xl p-6 flex flex-col items-center gap-3 transition group"
+                className="bg-[#1e293b] hover:bg-gray-500/20 border border-gray-700 hover:border-gray-400 rounded-xl p-6 flex flex-col items-center gap-3 transition group"
               >
                 <span className="text-4xl">{cat.icon}</span>
-                <span className="text-sm font-medium group-hover:text-emerald-400 transition">{cat.name}</span>
+                <span className="text-sm font-medium group-hover:text-gray-400 transition">{cat.name}</span>
               </Link>
             </motion.div>
           ))}
@@ -190,7 +190,7 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
           className="text-3xl font-bold text-center mb-10"
         >
-          Reading <span className="text-emerald-400">Guides</span>
+          Reading <span className="text-gray-400">Guides</span>
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {guides.map((guide, i) => (
@@ -199,7 +199,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="bg-[#1e293b] rounded-xl p-6 border border-gray-700 hover:border-emerald-400 transition"
+              className="bg-[#1e293b] rounded-xl p-6 border border-gray-700 hover:border-gray-400 transition"
             >
               <div className="text-4xl mb-4">{guide.icon}</div>
               <h3 className="font-semibold text-lg mb-2">{guide.title}</h3>
