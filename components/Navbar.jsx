@@ -33,8 +33,8 @@ export default function Navbar() {
         <nav className="bg-[#0f172a] text-white shadow-md border-b border-gray-700/50 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-300">
-                    <FiBookOpen size={24} />
+                <Link href="/" className="flex items-center gap-2 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-gray-500">
+                    <FiBookOpen size={24} className="text-gray-400" />
                     BiblioDrop
                 </Link>
 
@@ -68,20 +68,20 @@ export default function Navbar() {
                                 alt={user.name}
                                 className="w-8 h-8 rounded-full object-cover border border-gray-500"
                             />
-                            <button
-                                onClick={() => signOut()}
-                                className="bg-gray-700 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-1.5 rounded-full transition"
+                                <button
+                                    onClick={() => signOut()}
+                                    className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-1.5 rounded-full transition"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <Link
+                                href="/login"
+                                className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-1.5 rounded-full transition"
                             >
-                                Logout
-                            </button>
-                        </div>
-                    ) : (
-                        <Link
-                            href="/login"
-                            className="bg-gray-700 hover:from-gray-700 hover:to-gray-900 text-white text-sm px-4 py-1.5 rounded-full transition"
-                        >
-                            Login
-                        </Link>
+                                Login
+                            </Link>
                     )}
                 </div>
 
@@ -122,7 +122,7 @@ export default function Navbar() {
                     {user ? (
                         <button
                             onClick={() => { signOut(); setMenuOpen(false); }}
-                            className="bg-gray-700 text-white text-sm px-4 py-2 rounded-full text-left"
+                            className="bg-gradient-to-r from-gray-600 to-gray-800 text-white text-sm px-4 py-2 rounded-full text-left"
                         >
                             Logout
                         </button>
@@ -130,7 +130,7 @@ export default function Navbar() {
                         <Link
                             href="/login"
                             onClick={() => setMenuOpen(false)}
-                            className="bg-gray-700 text-white text-sm px-4 py-2 rounded-full"
+                            className="bg-gradient-to-r from-gray-600 to-gray-800 text-white text-sm px-4 py-2 rounded-full"
                         >
                             Login
                         </Link>
