@@ -30,10 +30,10 @@ export default function Navbar() {
     const isActive = (href) => pathname === href;
 
     return (
-        <nav className="bg-[#0f172a] text-white shadow-lg sticky top-0 z-50">
+        <nav className="bg-[#0f172a] text-white shadow-md border-b border-gray-700/50 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 text-xl font-bold text-emerald-400">
+                <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-300">
                     <FiBookOpen size={24} />
                     BiblioDrop
                 </Link>
@@ -44,7 +44,7 @@ export default function Navbar() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`text-sm font-medium transition hover:text-emerald-400 ${isActive(link.href) ? "text-emerald-400 border-b-2 border-emerald-400 pb-1" : "text-gray-300"
+                            className={`text-sm font-medium transition hover:text-gray-100 ${isActive(link.href) ? "text-gray-100 border-b-2 border-gray-500 pb-1" : "text-gray-400"
                                 }`}
                         >
                             {link.label}
@@ -54,7 +54,7 @@ export default function Navbar() {
                     {user && getDashboardLink() && (
                         <Link
                             href={getDashboardLink()}
-                            className={`text-sm font-medium transition hover:text-emerald-400 ${pathname.startsWith("/dashboard") ? "text-emerald-400" : "text-gray-300"
+                            className={`text-sm font-medium transition hover:text-gray-100 ${pathname.startsWith("/dashboard") ? "text-gray-100" : "text-gray-400"
                                 }`}
                         >
                             Dashboard
@@ -66,11 +66,11 @@ export default function Navbar() {
                             <img
                                 src={user.image || "https://i.ibb.co/placeholder.png"}
                                 alt={user.name}
-                                className="w-8 h-8 rounded-full object-cover border-2 border-emerald-400"
+                                className="w-8 h-8 rounded-full object-cover border border-gray-500"
                             />
                             <button
                                 onClick={() => signOut()}
-                                className="bg-emerald-500 hover:bg-emerald-600 text-white text-sm px-4 py-1.5 rounded-full transition"
+                                className="bg-gray-700 hover:bg-gray-600 text-white text-sm px-4 py-1.5 rounded-full transition"
                             >
                                 Logout
                             </button>
@@ -78,7 +78,7 @@ export default function Navbar() {
                     ) : (
                         <Link
                             href="/login"
-                            className="bg-emerald-500 hover:bg-emerald-600 text-white text-sm px-4 py-1.5 rounded-full transition"
+                            className="bg-gray-700 hover:bg-gray-600 text-white text-sm px-4 py-1.5 rounded-full transition"
                         >
                             Login
                         </Link>
@@ -87,7 +87,7 @@ export default function Navbar() {
 
                 {/* Mobile Hamburger */}
                 <button
-                    className="md:hidden text-gray-300"
+                    className="md:hidden text-gray-400"
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -102,7 +102,7 @@ export default function Navbar() {
                             key={link.href}
                             href={link.href}
                             onClick={() => setMenuOpen(false)}
-                            className={`text-sm font-medium py-2 transition hover:text-emerald-400 ${isActive(link.href) ? "text-emerald-400" : "text-gray-300"
+                            className={`text-sm font-medium py-2 transition hover:text-gray-100 ${isActive(link.href) ? "text-gray-100" : "text-gray-400"
                                 }`}
                         >
                             {link.label}
@@ -113,7 +113,7 @@ export default function Navbar() {
                         <Link
                             href={getDashboardLink()}
                             onClick={() => setMenuOpen(false)}
-                            className="text-sm font-medium py-2 text-gray-300 hover:text-emerald-400"
+                            className="text-sm font-medium py-2 text-gray-400 hover:text-gray-100"
                         >
                             Dashboard
                         </Link>
@@ -122,7 +122,7 @@ export default function Navbar() {
                     {user ? (
                         <button
                             onClick={() => { signOut(); setMenuOpen(false); }}
-                            className="bg-emerald-500 text-white text-sm px-4 py-2 rounded-full text-left"
+                            className="bg-gray-700 text-white text-sm px-4 py-2 rounded-full text-left"
                         >
                             Logout
                         </button>
@@ -130,7 +130,7 @@ export default function Navbar() {
                         <Link
                             href="/login"
                             onClick={() => setMenuOpen(false)}
-                            className="bg-emerald-500 text-white text-sm px-4 py-2 rounded-full"
+                            className="bg-gray-700 text-white text-sm px-4 py-2 rounded-full"
                         >
                             Login
                         </Link>
