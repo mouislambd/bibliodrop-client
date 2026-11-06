@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FiArrowRight } from "react-icons/fi";
@@ -96,12 +97,14 @@ export default function HomePage() {
               className="bg-[#0f172a] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
               <Link href={`/books/${book.id}`}>
-                <img src={book.image} alt={book.title} className="w-full h-40 object-cover" />
-                <div className="p-3">
-                  <h3 className="font-semibold text-sm truncate">{book.title}</h3>
-                  <p className="text-gray-400 text-xs">{book.author}</p>
-                </div>
-              </Link>
+              <div className="relative w-full h-40">
+                <Image src={book.image} alt={book.title} fill className="object-cover" />
+              </div>
+              <div className="p-3">
+                <h3 className="font-semibold text-sm truncate">{book.title}</h3>
+                <p className="text-gray-400 text-xs">{book.author}</p>
+              </div>
+            </Link>
             </motion.div>
           ))}
         </div>
