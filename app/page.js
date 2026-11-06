@@ -98,7 +98,15 @@ export default function HomePage() {
             >
               <Link href={`/books/${book.id}`}>
               <div className="relative w-full h-40">
-                <Image src={book.image} alt={book.title} fill className="object-cover" />
+                <Image 
+                  src={book.image} 
+                  alt={book.title} 
+                  fill 
+                  className="object-cover" 
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://via.placeholder.com/400x400?text=No+Image';
+                  }}
+                />
               </div>
               <div className="p-3">
                 <h3 className="font-semibold text-sm truncate">{book.title}</h3>
