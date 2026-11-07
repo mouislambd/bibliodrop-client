@@ -95,7 +95,7 @@ export default function HomePage() {
               transition={{ delay: i * 0.1 }}
               className="group cursor-pointer"
             >
-              <Link href={`/books/${book.id}`}>
+              <Link href={`/books/${book.id}/read`}>
                 <div className="relative aspect-[2/3] overflow-hidden rounded-md shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:-translate-y-2">
                     <img 
                       src={book.image} 
