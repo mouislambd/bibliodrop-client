@@ -72,7 +72,7 @@ export default function HomePage() {
       </section>
 
       {/* New Arrivals */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
+      <section className="max-w-7xl mx-auto px-4 py-16 bg-[#1e293b] rounded-2xl my-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +93,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
-              className="bg-[#1e293b] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
+              className="bg-[#0f172a] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
               <Link href={`/books/${book.id}`}>
                 <img 
