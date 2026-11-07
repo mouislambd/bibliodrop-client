@@ -269,6 +269,12 @@ export default function BookDetailsPage({ params }) {
                                         {wishlistLoading ? "..." : isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
                                     </button>
                                 )}
+                                <Link 
+                                    href={`/books/${id}/read`}
+                                    className="inline-block bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-medium w-fit transition text-center"
+                                >
+                                    Read Book
+                                </Link>
                             </div>
                         )}
                     </div>

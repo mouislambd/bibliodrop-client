@@ -72,7 +72,7 @@ export default function HomePage() {
       </section>
 
       {/* New Arrivals */}
-      <section className="max-w-7xl mx-auto px-4 py-16 bg-[#1e293b] rounded-2xl my-10">
+      <section className="max-w-7xl mx-auto px-4 py-16">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export default function HomePage() {
         >
           New <span className="text-gray-400">Arrivals</span>
         </motion.h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { id: "new-1", title: "The Midnight Library", author: "Matt Haig", image: "https://picsum.photos/400/600?random=10" },
             { id: "new-2", title: "Project Hail Mary", author: "Andy Weir", image: "https://picsum.photos/400/600?random=11" },
@@ -93,20 +93,20 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
-              className="group relative cursor-pointer"
+              className="group cursor-pointer"
             >
               <Link href={`/books/${book.id}`}>
-                <div className="relative aspect-[2/3] overflow-hidden rounded-lg shadow-2xl transition-transform duration-300 group-hover:-translate-y-2">
+                <div className="relative aspect-[2/3] overflow-hidden rounded-md shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:-translate-y-2">
                     <img 
                       src={book.image} 
                       alt={book.title} 
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 </div>
                 <div className="mt-4 text-center">
-                  <h3 className="font-semibold text-sm truncate">{book.title}</h3>
-                  <p className="text-gray-400 text-xs">{book.author}</p>
+                  <h3 className="font-semibold text-sm">{book.title}</h3>
+                  <p className="text-gray-400 text-xs mt-1">{book.author}</p>
                 </div>
               </Link>
             </motion.div>
