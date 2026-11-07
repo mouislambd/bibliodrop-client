@@ -93,15 +93,18 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
-              className="bg-[#0f172a] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
+              className="group relative cursor-pointer"
             >
               <Link href={`/books/${book.id}`}>
-                <img 
-                  src={book.image} 
-                  alt={book.title} 
-                  className="w-full h-40 object-cover" 
-                />
-                <div className="p-3">
+                <div className="relative aspect-[2/3] overflow-hidden rounded-lg shadow-2xl transition-transform duration-300 group-hover:-translate-y-2">
+                    <img 
+                      src={book.image} 
+                      alt={book.title} 
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80" />
+                </div>
+                <div className="mt-4 text-center">
                   <h3 className="font-semibold text-sm truncate">{book.title}</h3>
                   <p className="text-gray-400 text-xs">{book.author}</p>
                 </div>
