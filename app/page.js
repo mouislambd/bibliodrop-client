@@ -71,6 +71,46 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* New Arrivals */}
+      <section className="max-w-7xl mx-auto px-4 py-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-center mb-10"
+        >
+          New <span className="text-gray-400">Arrivals</span>
+        </motion.h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { id: "new-1", title: "The Midnight Library", author: "Matt Haig", image: "https://picsum.photos/400/600?random=10" },
+            { id: "new-2", title: "Project Hail Mary", author: "Andy Weir", image: "https://picsum.photos/400/600?random=11" },
+            { id: "new-3", title: "Klara and the Sun", author: "Kazuo Ishiguro", image: "https://picsum.photos/400/600?random=12" },
+            { id: "new-4", title: "The Vanishing Half", author: "Brit Bennett", image: "https://picsum.photos/400/600?random=13" },
+          ].map((book, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-[#1e293b] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
+            >
+              <Link href={`/books/${book.id}`}>
+                <img 
+                  src={book.image} 
+                  alt={book.title} 
+                  className="w-full h-40 object-cover" 
+                />
+                <div className="p-3">
+                  <h3 className="font-semibold text-sm truncate">{book.title}</h3>
+                  <p className="text-gray-400 text-xs">{book.author}</p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* New Section: Trending Books */}
       <section className="max-w-7xl mx-auto px-4 py-16 bg-[#1e293b] rounded-2xl my-10">
         <motion.h2
