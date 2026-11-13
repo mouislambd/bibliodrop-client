@@ -101,6 +101,9 @@ export default function HomePage() {
                       src={book.image} 
                       alt={book.title} 
                       className="w-full h-full object-cover" 
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/400x600?text=Book+Cover';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 </div>
@@ -190,7 +193,10 @@ export default function HomePage() {
                     <img
                       src={book.coverImage}
                       alt={book.title}
-                      className="w-full h-48 object-cover bg-[#0f172a]"
+                      className="w-full h-full object-cover bg-[#0f172a]"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/400x600?text=Book+Cover';
+                      }}
                     />
                     <div className="p-3">
                       <h3 className="font-semibold text-sm truncate">{book.title}</h3>
@@ -229,6 +235,9 @@ export default function HomePage() {
                   src={lib.avatar}
                   alt={lib.name}
                   className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-gray-400 bg-[#1e293b]"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://via.placeholder.com/100x100?text=User';
+                  }}
                 />
                 <h3 className="font-semibold text-lg">{lib.name}</h3>
                 <p className="text-gray-400 text-sm">{lib.deliveries} deliveries completed</p>
