@@ -191,9 +191,9 @@ export default function HomePage() {
                 <Link href={`/books/${book._id}`}>
                   <div className="bg-[#1e293b] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 h-full">
                     <img
-                      src={book.coverImage}
+                      src={book.coverImage?.startsWith('http') ? book.coverImage : `${API}${book.coverImage}`}
                       alt={book.title}
-                      className="w-full h-full object-cover bg-[#0f172a]"
+                      className="w-full h-48 object-cover bg-[#0f172a]"
                       onError={(e) => {
                         e.currentTarget.src = 'https://via.placeholder.com/400x600?text=Book+Cover';
                       }}
