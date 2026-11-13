@@ -2,6 +2,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NewsletterSection from "@/components/NewsletterSection";
 import { Toaster } from "react-hot-toast";
 
 const geist = Geist({ subsets: ["latin"] });
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <main className="min-h-screen">
           {children}
         </main>
+        <NewsletterSection />
         <Footer />
         <Toaster position="top-right" />
       </body>
